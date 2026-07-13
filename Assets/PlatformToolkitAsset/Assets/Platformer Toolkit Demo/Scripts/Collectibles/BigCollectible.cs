@@ -1,24 +1,18 @@
-// SmallCollectible.cs
+// BigCollectible.cs
 using UnityEngine;
 
 namespace GMTK.PlatformerToolkit {
 
-    public class SmallCollectible : MonoBehaviour {
+    public class BigCollectible : MonoBehaviour {
 
         [Header("Components")]
         [SerializeField] private AudioSource pickupSound;
         [SerializeField] private Animator animator;
 
-        [Header("Settings")]
-        [SerializeField] private CircleCollider2D pickupCollider;
-        // Set the collider radius larger than the sprite in the Inspector
-
         private bool collected = false;
 
         private void OnTriggerEnter2D(Collider2D other) {
             if (collected) return;
-
-            // Check if it's the player or the mount
             if (other.GetComponent<characterMovement>() == null) return;
 
             Collect();
@@ -27,21 +21,27 @@ namespace GMTK.PlatformerToolkit {
         private void Collect() {
             collected = true;
 
-            GameManager.Instance.Session.SmallCollectiblesThisRun++;
+            GameManager.Instance.Session.BigCollectiblesThisRun++;
 
-            // Tell the UI to update
-            CollectibleUI.Instance.UpdateSmallCount(
-                GameManager.Instance.Session.SmallCollectiblesThisRun
+            CollectibleUI.Instance.UpdateBigCount(
+                GameManager.Instance.Session.BigCollectiblesThisRun,
+                LevelManager.Instance.TotalBigCollectibles
             );
 
             if (pickupSound != null) {
-                // Detach sound so it finishes playing after the object is destroyed
                 pickupSound.transform.SetParent(null);
                 pickupSound.Play();
                 Destroy(pickupSound.gameObject, pickupSound.clip.length);
             }
 
-            Destroy(gameObject);
+            // Big collectibles might have a collect animation before destroying
+            if (animator != null) {
+                animator.SetTrigger("Collected");
+                // Destroy after animation — set this to match your animation length
+                Destroy(gameObject, 0.5f);
+            } else {
+                Destroy(gameObject);
+            }
         }
     }
 }

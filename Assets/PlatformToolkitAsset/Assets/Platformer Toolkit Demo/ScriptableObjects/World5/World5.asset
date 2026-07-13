@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3c1d34356d12924cb83d507691e56f8, type: 3}
+  m_Name: World5
+  m_EditorClassIdentifier: 
+  kingdomId: 5
+  kingdomName: 
+  mainLevels:
+  - {fileID: 11400000, guid: f978757e589bf8243ae709acd5232a9e, type: 2}
+  - {fileID: 11400000, guid: 5943af6fbd3acc543ab5912b5c879f9d, type: 2}
+  - {fileID: 11400000, guid: eabf55f836b329849baff571b96049af, type: 2}
+  - {fileID: 11400000, guid: eb9a42aac2af7054b9b4d53d99f45c35, type: 2}
+  - {fileID: 11400000, guid: dbe6372c08f657c42a8cec13889157af, type: 2}
+  - {fileID: 11400000, guid: 7dfff57af8b8e194d9ff5a9d95ecf3e9, type: 2}
+  bonusLevels: []
+  bonusUnlockLevelIndex: 0

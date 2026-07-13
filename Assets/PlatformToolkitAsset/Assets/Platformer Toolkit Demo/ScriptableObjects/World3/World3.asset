@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3c1d34356d12924cb83d507691e56f8, type: 3}
+  m_Name: World3
+  m_EditorClassIdentifier: 
+  kingdomId: 3
+  kingdomName: WaterKingdom
+  mainLevels:
+  - {fileID: 11400000, guid: 0bcb93a76b0072e4199d39be2215802d, type: 2}
+  - {fileID: 11400000, guid: 100f3cbcaf35abc4f87d252dc0f020e2, type: 2}
+  - {fileID: 11400000, guid: 559aa611d75a16b4bb12ed340d53708c, type: 2}
+  - {fileID: 11400000, guid: 97a0b6177990b144991935106ba198ba, type: 2}
+  - {fileID: 11400000, guid: 44182d0d511711647a6139cb47bac227, type: 2}
+  - {fileID: 11400000, guid: ab4955b93a423a141af8b61df0b79ed2, type: 2}
+  bonusLevels: []
+  bonusUnlockLevelIndex: 0

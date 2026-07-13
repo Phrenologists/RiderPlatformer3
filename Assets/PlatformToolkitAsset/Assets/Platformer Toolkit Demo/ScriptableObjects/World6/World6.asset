@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3c1d34356d12924cb83d507691e56f8, type: 3}
+  m_Name: World6
+  m_EditorClassIdentifier: 
+  kingdomId: 6
+  kingdomName: Hell
+  mainLevels:
+  - {fileID: 11400000, guid: a381ae7252ccca44fadc5309b3df7dbb, type: 2}
+  - {fileID: 11400000, guid: 3ad3a1826a8699c489aac6e778d1241a, type: 2}
+  - {fileID: 11400000, guid: 484ac264de3c5914cbf1a52a69b0a298, type: 2}
+  - {fileID: 11400000, guid: 5182a2b4462b47f4cabfa53c5474beff, type: 2}
+  - {fileID: 11400000, guid: cf97ba8145b0a8346b11670bf47c795b, type: 2}
+  - {fileID: 11400000, guid: 65cbeb7ec6fb5fa448559d8bda12997d, type: 2}
+  bonusLevels: []
+  bonusUnlockLevelIndex: 0

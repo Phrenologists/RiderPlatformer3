@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3c1d34356d12924cb83d507691e56f8, type: 3}
+  m_Name: World4
+  m_EditorClassIdentifier: 
+  kingdomId: 4
+  kingdomName: IceKingdom
+  mainLevels:
+  - {fileID: 11400000, guid: 840881178aab61a48985311d9e214810, type: 2}
+  - {fileID: 11400000, guid: 67546f407a88cff4896efea9a3ed916b, type: 2}
+  - {fileID: 11400000, guid: e8253d597ac65b8439ecefbf19d849d5, type: 2}
+  - {fileID: 11400000, guid: 9244c9060d600e74494a9a1885390363, type: 2}
+  - {fileID: 11400000, guid: 2275f25ee87ca4e47b3a5e05e92f27f5, type: 2}
+  - {fileID: 11400000, guid: ff7bb9183dac7ba47899cca44c36a31b, type: 2}
+  bonusLevels: []
+  bonusUnlockLevelIndex: 0

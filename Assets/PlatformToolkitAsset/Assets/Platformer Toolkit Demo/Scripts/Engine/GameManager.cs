@@ -24,7 +24,27 @@ namespace GMTK.PlatformerToolkit {
         // Session state — resets each level
         public SessionData Session { get; private set; }
 
-        private string SavePath => Path.Combine(Application.persistentDataPath, "save.json");
+        [SerializeField] private string editorSavePath = "SaveData";
+        
+        
+        private string SavePath {
+            get {
+#if UNITY_EDITOR
+                // Use a path relative to the project root during development
+                string fullPath = System.IO.Path.Combine(
+                    System.IO.Directory.GetParent(Application.dataPath).FullName,
+                    editorSavePath
+                );
+                // Create the folder if it doesn't exist yet
+                if (!System.IO.Directory.Exists(fullPath))
+                    System.IO.Directory.CreateDirectory(fullPath);
+                return System.IO.Path.Combine(fullPath, "save.json");
+#else
+            // Always use persistentDataPath in a real build
+            return System.IO.Path.Combine(Application.persistentDataPath, "save.json");
+#endif
+            }
+        }
 
         private void Awake() {
             if (Instance != null && Instance != this) {
@@ -78,6 +98,9 @@ namespace GMTK.PlatformerToolkit {
             Session = new SessionData(kingdomIndex, levelIndex, trialType);
             var level = kingdoms[kingdomIndex].mainLevels[levelIndex];
             SceneManager.LoadScene(level.sceneName);
+        }
+        public void CreateTestSession(int kingdomIndex = 0, int levelIndex = 0) {
+            Session = new SessionData(kingdomIndex, levelIndex, null);
         }
 
         // Called by the level's end trigger

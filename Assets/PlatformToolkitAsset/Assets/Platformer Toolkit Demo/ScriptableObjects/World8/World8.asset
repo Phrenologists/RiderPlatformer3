@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3c1d34356d12924cb83d507691e56f8, type: 3}
+  m_Name: World8
+  m_EditorClassIdentifier: 
+  kingdomId: 8
+  kingdomName: Corrupted
+  mainLevels:
+  - {fileID: 11400000, guid: 75b3576ad4d378042a1dbf11ab5df289, type: 2}
+  - {fileID: 11400000, guid: a57b8fa4eba579347bbe2fe8e5a61c80, type: 2}
+  - {fileID: 11400000, guid: ef10d9f56f68d4c40ad474cab2ee56ad, type: 2}
+  - {fileID: 11400000, guid: 369fe0514843db54cadd83687cc293ae, type: 2}
+  - {fileID: 11400000, guid: 0556065723ba0544880444f946c617d0, type: 2}
+  - {fileID: 11400000, guid: 4b350f1dd5f534241991813e4229541e, type: 2}
+  bonusLevels: []
+  bonusUnlockLevelIndex: 0

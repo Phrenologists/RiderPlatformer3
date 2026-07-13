@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3c1d34356d12924cb83d507691e56f8, type: 3}
+  m_Name: World7
+  m_EditorClassIdentifier: 
+  kingdomId: 7
+  kingdomName: Heaven
+  mainLevels:
+  - {fileID: 11400000, guid: f3698e0483828284c8578efea2bf0438, type: 2}
+  - {fileID: 11400000, guid: 72ed0c18c4a20a84385b0718391706da, type: 2}
+  - {fileID: 11400000, guid: 35f316fe9c3d7e34cbfbea8f43229a16, type: 2}
+  - {fileID: 11400000, guid: 69b4141599ef0ef49af0b7f3d7a847e8, type: 2}
+  - {fileID: 11400000, guid: bdf4cf23552e1cd44aa2fb86219cdc79, type: 2}
+  - {fileID: 11400000, guid: cf6767f76244dc148bfb4c5663e79d1f, type: 2}
+  bonusLevels: []
+  bonusUnlockLevelIndex: 0

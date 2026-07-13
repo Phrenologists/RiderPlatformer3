@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3c1d34356d12924cb83d507691e56f8, type: 3}
+  m_Name: World2
+  m_EditorClassIdentifier: 
+  kingdomId: 2
+  kingdomName: SandKingdom
+  mainLevels:
+  - {fileID: 11400000, guid: a5523ce5ad947c44797c8d7a54a2aea3, type: 2}
+  - {fileID: 11400000, guid: d4103ce0fec1df84cb01a3c2866c483d, type: 2}
+  - {fileID: 11400000, guid: 64f926b3d6486004cbf504a61e651892, type: 2}
+  - {fileID: 11400000, guid: 941e9c9092bc0ba40bb940930fbb51cf, type: 2}
+  - {fileID: 11400000, guid: 88ea26ec31a6f13458d9b1f26990baf6, type: 2}
+  - {fileID: 11400000, guid: f9334891baa3d8f488292417891c631b, type: 2}
+  bonusLevels: []
+  bonusUnlockLevelIndex: 0
