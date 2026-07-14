@@ -1,5 +1,6 @@
 // LevelManager.cs
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace GMTK.PlatformerToolkit
 {
@@ -8,11 +9,14 @@ namespace GMTK.PlatformerToolkit
     // like total collectible counts and provides the level end trigger.
     public class LevelManager : MonoBehaviour
     {
+        [SerializeField] private AudioClip levelMusic;
 
         public static LevelManager Instance { get; private set; }
 
         [Header("Level Settings")] [SerializeField]
         private int totalBigCollectibles;
+        
+        public bool MusicWasCarriedIn { get; private set; } = false;
 
         public int TotalBigCollectibles => totalBigCollectibles;
 
@@ -36,9 +40,16 @@ namespace GMTK.PlatformerToolkit
                 // or just use 0,0 as a placeholder for testing
                 GameManager.Instance.CreateTestSession();
                 // Reset the UI to zero on level load
-                CollectibleUI.Instance.Initialise(totalBigCollectibles);
+                
 
             }
+            if (levelMusic != null && !MusicManager.Instance.MusicWasCarriedIn) {
+                MusicManager.Instance.PlayTrack(levelMusic);
+            }
+            CollectibleUI.Instance.Initialise(totalBigCollectibles);
         }
+        
+        
     }
+    
 }

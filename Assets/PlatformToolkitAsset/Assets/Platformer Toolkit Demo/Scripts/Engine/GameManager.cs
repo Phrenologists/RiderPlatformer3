@@ -45,6 +45,8 @@ namespace GMTK.PlatformerToolkit {
 #endif
             }
         }
+        
+        [SerializeField] private AudioClip worldMapMusicClip;
 
         private void Awake() {
             if (Instance != null && Instance != this) {
@@ -97,7 +99,7 @@ namespace GMTK.PlatformerToolkit {
         public void StartLevel(int kingdomIndex, int levelIndex, TrialType? trialType = null) {
             Session = new SessionData(kingdomIndex, levelIndex, trialType);
             var level = kingdoms[kingdomIndex].mainLevels[levelIndex];
-            SceneManager.LoadScene(level.sceneName);
+            SceneTransition.Instance.TransitionToScene(worldMapSceneName);
         }
         public void CreateTestSession(int kingdomIndex = 0, int levelIndex = 0) {
             Session = new SessionData(kingdomIndex, levelIndex, null);
@@ -160,9 +162,18 @@ namespace GMTK.PlatformerToolkit {
             if (li == kingdoms[ki].bonusUnlockLevelIndex) {
                 SaveData.kingdoms[ki].bonusLevelUnlocked = true;
             }
+            
+            
 
             WriteToDisk();
-            SceneManager.LoadScene(worldMapSceneName);
+            
+            var musicLevelDef = kingdoms[Session.KingdomIndex].mainLevels[Session.LevelIndex];
+
+            MusicManager.Instance.SetNextSceneMusic(
+                carryOver: musicLevelDef.carryMusicToWorldMap,
+                nextTrack: musicLevelDef.carryMusicToWorldMap ? null : worldMapMusicClip
+            );
+            SceneTransition.Instance.TransitionToScene(worldMapSceneName);
         }
 
         // ── Move Unlock Helpers ───────────────────────────────────────────

@@ -3,8 +3,9 @@
 using System.Collections.Generic;
 
 namespace GMTK.PlatformerToolkit {
-
     [System.Serializable]
+    
+    
     public class LevelSaveData {
         public bool completed;
         public int bestSmallCollectibles;
@@ -26,6 +27,10 @@ namespace GMTK.PlatformerToolkit {
         // World map state — where to place the player on load
         public int lastKingdomIndex = 0;
         public int lastLevelNodeIndex = 0;
+        
+        public List<string> playedUnlockAnimations = new List<string>();
+        
+        public bool carryOverMusic = false;
 
         // Per-kingdom, per-level progress
         public List<KingdomSaveData> kingdoms = new List<KingdomSaveData>();

@@ -10,6 +10,8 @@ namespace GMTK.PlatformerToolkit {
         public string kingdomName;
         public List<LevelDefinition> mainLevels = new List<LevelDefinition>();
         public List<LevelDefinition> bonusLevels = new List<LevelDefinition>();
+        public string kingdomMapSceneName;
+        public List<int> levelUnlockRequirements;
 
         // Which main level index (0-based) unlocks the bonus level tile
         public int bonusUnlockLevelIndex;
