@@ -47,6 +47,18 @@ namespace GMTK.PlatformerToolkit {
         }
         
         [SerializeField] private AudioClip worldMapMusicClip;
+        
+        public int CurrentKingdomIndex { get; private set; } = -1;
+        
+        public int CurrentLevelIndex { get; private set; } = -1;
+        
+        public enum KingdomMapEntryMode {
+            FromWorldMap,   // always start on node 0
+            FromLevel       // restore last saved node position
+        }
+        
+        public KingdomMapEntryMode KingdomEntryMode { get; set; }
+            = KingdomMapEntryMode.FromWorldMap;
 
         private void Awake() {
             if (Instance != null && Instance != this) {
@@ -58,6 +70,15 @@ namespace GMTK.PlatformerToolkit {
 
             LoadGame();
         }
+        
+        public void EnterKingdom(int kingdomIndex) {
+            CurrentKingdomIndex = kingdomIndex;
+        }
+
+        public void EnterLevel(int levelIndex)
+        {
+            CurrentLevelIndex = levelIndex;
+        }
 
         // ── Save / Load ───────────────────────────────────────────────────
 
@@ -65,7 +86,9 @@ namespace GMTK.PlatformerToolkit {
             if (File.Exists(SavePath)) {
                 string json = File.ReadAllText(SavePath);
                 SaveData = JsonUtility.FromJson<SaveData>(json);
+                //Debug.Log("Save file found");
             } else {
+                //Debug.Log("Save file not found");
                 SaveData = CreateNewSave();
                 WriteToDisk();
             }
@@ -99,7 +122,7 @@ namespace GMTK.PlatformerToolkit {
         public void StartLevel(int kingdomIndex, int levelIndex, TrialType? trialType = null) {
             Session = new SessionData(kingdomIndex, levelIndex, trialType);
             var level = kingdoms[kingdomIndex].mainLevels[levelIndex];
-            SceneTransition.Instance.TransitionToScene(worldMapSceneName);
+            //SceneTransition.Instance.TransitionToScene(level.sceneName);
         }
         public void CreateTestSession(int kingdomIndex = 0, int levelIndex = 0) {
             Session = new SessionData(kingdomIndex, levelIndex, null);
@@ -111,9 +134,13 @@ namespace GMTK.PlatformerToolkit {
             int li = Session.LevelIndex;
             var levelSave = SaveData.kingdoms[ki].levels[li];
             var levelDef = kingdoms[ki].mainLevels[li];
+            
+            Debug.Log(levelSave);
+            Debug.Log(levelSave.completed);
 
             // Mark completed
             levelSave.completed = true;
+            WriteToDisk();
 
             // Update best small collectibles
             if (Session.SmallCollectiblesThisRun > levelSave.bestSmallCollectibles) {
@@ -158,8 +185,8 @@ namespace GMTK.PlatformerToolkit {
                 SaveData.kingdoms[ki + 1].unlocked = true;
             }
 
-            // Unlock bonus level tile if applicable
-            if (li == kingdoms[ki].bonusUnlockLevelIndex) {
+            if (kingdoms[ki].bonusUnlockLevelIndex > 0 
+                && li == kingdoms[ki].bonusUnlockLevelIndex) {
                 SaveData.kingdoms[ki].bonusLevelUnlocked = true;
             }
             
@@ -168,12 +195,30 @@ namespace GMTK.PlatformerToolkit {
             WriteToDisk();
             
             var musicLevelDef = kingdoms[Session.KingdomIndex].mainLevels[Session.LevelIndex];
+            bool isLastLevelInKingdom = li == kingdoms[ki].mainLevels.Count - 1;
 
-            MusicManager.Instance.SetNextSceneMusic(
-                carryOver: musicLevelDef.carryMusicToWorldMap,
-                nextTrack: musicLevelDef.carryMusicToWorldMap ? null : worldMapMusicClip
-            );
-            SceneTransition.Instance.TransitionToScene(worldMapSceneName);
+            if (isLastLevelInKingdom) {
+                // Return to world map so the new kingdom unlock animation plays
+                KingdomEntryMode = KingdomMapEntryMode.FromWorldMap;
+                MusicManager.Instance.SetNextSceneMusic(
+                    carryOver: musicLevelDef.carryMusicToWorldMap,
+                    nextTrack: musicLevelDef.carryMusicToWorldMap ? null : worldMapMusicClip
+                );
+                SceneTransition.Instance.TransitionToScene(worldMapSceneName);
+            }
+            else
+            {
+                // Return to kingdom map so the level unlock animation plays
+                KingdomEntryMode = KingdomMapEntryMode.FromLevel;
+                MusicManager.Instance.SetNextSceneMusic(
+                    carryOver: false,
+                    nextTrack: null
+                    // KingdomMapManager will handle its own music
+                );
+            }
+
+            SceneTransition.Instance.TransitionToScene(kingdoms[ki].kingdomMapSceneName);
+            //KingdomMapManager.Instance.levelUnlocked = true;
         }
 
         // ── Move Unlock Helpers ───────────────────────────────────────────

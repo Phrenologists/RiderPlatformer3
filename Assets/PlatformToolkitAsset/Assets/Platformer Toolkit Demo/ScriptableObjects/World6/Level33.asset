@@ -13,8 +13,12 @@ MonoBehaviour:
   m_Name: Level33
   m_EditorClassIdentifier: 
   levelId: 33
-  sceneName: Hell3
-  totalSmallCollectibles: 0
-  totalBigCollectibles: 0
+  sceneName: Level33
+  totalSmallCollectibles: 150
+  totalBigCollectibles: 5
   availableTrialTypes: 
+  carryMusicToWorldMap: 0
+  carryMusicToNextScene: 0
+  levelName: Level33
+  levelMusic: {fileID: 0}
   moveUnlockedHere: {fileID: 0}

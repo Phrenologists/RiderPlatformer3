@@ -13,6 +13,8 @@ namespace GMTK.PlatformerToolkit {
         public List<TrialType> availableTrialTypes = new List<TrialType>();
         public bool carryMusicToWorldMap = false;
         public bool carryMusicToNextScene = false;
+        public string levelName;
+        public AudioClip levelMusic;
 
         // Null if this level unlocks no move
         public MoveDefinition moveUnlockedHere;

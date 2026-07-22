@@ -1,0 +1,546 @@
+{
+    "lastKingdomIndex": 0,
+    "lastLevelNodeIndex": 4,
+    "playedUnlockAnimations": [
+        "kingdom_0_level_0",
+        "kingdom_0_level_1",
+        "kingdom_0_level_2",
+        "kingdom_0_level_3",
+        "kingdom_0_level_4",
+        "kingdom_0_level_5",
+        "kingdom_1",
+        "kingdom_1_level_0",
+        "kingdom_1_level_1",
+        "kingdom_1_level_2",
+        "kingdom_1_level_3",
+        "kingdom_1_level_4",
+        "kingdom_1_level_5",
+        "kingdom_2",
+        "kingdom_2_level_0",
+        "kingdom_2_level_1",
+        "kingdom_2_level_2",
+        "kingdom_2_level_3",
+        "kingdom_2_level_4",
+        "kingdom_2_level_5",
+        "kingdom_3",
+        "kingdom_3_level_0",
+        "kingdom_3_level_1",
+        "kingdom_3_level_2",
+        "kingdom_3_level_3",
+        "kingdom_3_level_4",
+        "kingdom_3_level_5",
+        "kingdom_4",
+        "kingdom_4_level_0",
+        "kingdom_4_level_1",
+        "kingdom_4_level_2",
+        "kingdom_4_level_3",
+        "kingdom_4_level_4",
+        "kingdom_4_level_5",
+        "kingdom_5",
+        "kingdom_5_level_0",
+        "kingdom_5_level_1",
+        "kingdom_5_level_2",
+        "kingdom_5_level_3",
+        "kingdom_5_level_4",
+        "kingdom_5_level_5",
+        "kingdom_6",
+        "kingdom_6_level_0",
+        "kingdom_6_level_1",
+        "kingdom_6_level_2",
+        "kingdom_6_level_3",
+        "kingdom_6_level_4",
+        "kingdom_6_level_5",
+        "kingdom_7",
+        "kingdom_7_level_0",
+        "kingdom_7_level_1",
+        "kingdom_7_level_2",
+        "kingdom_7_level_3",
+        "kingdom_7_level_4",
+        "kingdom_7_level_5"
+    ],
+    "carryOverMusic": false,
+    "kingdoms": [
+        {
+            "unlocked": true,
+            "bonusLevelUnlocked": false,
+            "levels": [
+                {
+                    "completed": true,
+                    "bestSmallCollectibles": 0,
+                    "bestBigCollectibles": 0,
+                    "bestTimes": {
+                        "keys": [],
+                        "values": []
+                    }
+                },
+                {
+                    "completed": true,
+                    "bestSmallCollectibles": 0,
+                    "bestBigCollectibles": 0,
+                    "bestTimes": {
+                        "keys": [],
+                        "values": []
+                    }
+                },
+                {
+                    "completed": true,
+                    "bestSmallCollectibles": 0,
+                    "bestBigCollectibles": 0,
+                    "bestTimes": {
+                        "keys": [],
+                        "values": []
+                    }
+                },
+                {
+                    "completed": true,
+                    "bestSmallCollectibles": 0,
+                    "bestBigCollectibles": 0,
+                    "bestTimes": {
+                        "keys": [],
+                        "values": []
+                    }
+                },
+                {
+                    "completed": true,
+                    "bestSmallCollectibles": 0,
+                    "bestBigCollectibles": 0,
+                    "bestTimes": {
+                        "keys": [],
+                        "values": []
+                    }
+                },
+                {
+                    "completed": true,
+                    "bestSmallCollectibles": 0,
+                    "bestBigCollectibles": 0,
+                    "bestTimes": {
+                        "keys": [],
+                        "values": []
+                    }
+                }
+            ]
+        },
+        {
+            "unlocked": true,
+            "bonusLevelUnlocked": false,
+            "levels": [
+                {
+                    "completed": true,
+                    "bestSmallCollectibles": 0,
+                    "bestBigCollectibles": 0,
+                    "bestTimes": {
+                        "keys": [],
+                        "values": []
+                    }
+                },
+                {
+                    "completed": true,
+                    "bestSmallCollectibles": 0,
+                    "bestBigCollectibles": 0,
+                    "bestTimes": {
+                        "keys": [],
+                        "values": []
+                    }
+                },
+                {
+                    "completed": true,
+                    "bestSmallCollectibles": 0,
+                    "bestBigCollectibles": 0,
+                    "bestTimes": {
+                        "keys": [],
+                        "values": []
+                    }
+                },
+                {
+                    "completed": true,
+                    "bestSmallCollectibles": 0,
+                    "bestBigCollectibles": 0,
+                    "bestTimes": {
+                        "keys": [],
+                        "values": []
+                    }
+                },
+                {
+                    "completed": true,
+                    "bestSmallCollectibles": 0,
+                    "bestBigCollectibles": 0,
+                    "bestTimes": {
+                        "keys": [],
+                        "values": []
+                    }
+                },
+                {
+                    "completed": true,
+                    "bestSmallCollectibles": 0,
+                    "bestBigCollectibles": 0,
+                    "bestTimes": {
+                        "keys": [],
+                        "values": []
+                    }
+                }
+            ]
+        },
+        {
+            "unlocked": true,
+            "bonusLevelUnlocked": false,
+            "levels": [
+                {
+                    "completed": true,
+                    "bestSmallCollectibles": 0,
+                    "bestBigCollectibles": 0,
+                    "bestTimes": {
+                        "keys": [],
+                        "values": []
+                    }
+                },
+                {
+                    "completed": true,
+                    "bestSmallCollectibles": 0,
+                    "bestBigCollectibles": 0,
+                    "bestTimes": {
+                        "keys": [],
+                        "values": []
+                    }
+                },
+                {
+                    "completed": true,
+                    "bestSmallCollectibles": 0,
+                    "bestBigCollectibles": 0,
+                    "bestTimes": {
+                        "keys": [],
+                        "values": []
+                    }
+                },
+                {
+                    "completed": true,
+                    "bestSmallCollectibles": 0,
+                    "bestBigCollectibles": 0,
+                    "bestTimes": {
+                        "keys": [],
+                        "values": []
+                    }
+                },
+                {
+                    "completed": true,
+                    "bestSmallCollectibles": 0,
+                    "bestBigCollectibles": 0,
+                    "bestTimes": {
+                        "keys": [],
+                        "values": []
+                    }
+                },
+                {
+                    "completed": true,
+                    "bestSmallCollectibles": 0,
+                    "bestBigCollectibles": 0,
+                    "bestTimes": {
+                        "keys": [],
+                        "values": []
+                    }
+                }
+            ]
+        },
+        {
+            "unlocked": true,
+            "bonusLevelUnlocked": false,
+            "levels": [
+                {
+                    "completed": true,
+                    "bestSmallCollectibles": 0,
+                    "bestBigCollectibles": 0,
+                    "bestTimes": {
+                        "keys": [],
+                        "values": []
+                    }
+                },
+                {
+                    "completed": true,
+                    "bestSmallCollectibles": 0,
+                    "bestBigCollectibles": 0,
+                    "bestTimes": {
+                        "keys": [],
+                        "values": []
+                    }
+                },
+                {
+                    "completed": true,
+                    "bestSmallCollectibles": 0,
+                    "bestBigCollectibles": 0,
+                    "bestTimes": {
+                        "keys": [],
+                        "values": []
+                    }
+                },
+                {
+                    "completed": true,
+                    "bestSmallCollectibles": 0,
+                    "bestBigCollectibles": 0,
+                    "bestTimes": {
+                        "keys": [],
+                        "values": []
+                    }
+                },
+                {
+                    "completed": true,
+                    "bestSmallCollectibles": 0,
+                    "bestBigCollectibles": 0,
+                    "bestTimes": {
+                        "keys": [],
+                        "values": []
+                    }
+                },
+                {
+                    "completed": true,
+                    "bestSmallCollectibles": 0,
+                    "bestBigCollectibles": 0,
+                    "bestTimes": {
+                        "keys": [],
+                        "values": []
+                    }
+                }
+            ]
+        },
+        {
+            "unlocked": true,
+            "bonusLevelUnlocked": false,
+            "levels": [
+                {
+                    "completed": true,
+                    "bestSmallCollectibles": 0,
+                    "bestBigCollectibles": 0,
+                    "bestTimes": {
+                        "keys": [],
+                        "values": []
+                    }
+                },
+                {
+                    "completed": true,
+                    "bestSmallCollectibles": 0,
+                    "bestBigCollectibles": 0,
+                    "bestTimes": {
+                        "keys": [],
+                        "values": []
+                    }
+                },
+                {
+                    "completed": true,
+                    "bestSmallCollectibles": 0,
+                    "bestBigCollectibles": 0,
+                    "bestTimes": {
+                        "keys": [],
+                        "values": []
+                    }
+                },
+                {
+                    "completed": true,
+                    "bestSmallCollectibles": 0,
+                    "bestBigCollectibles": 0,
+                    "bestTimes": {
+                        "keys": [],
+                        "values": []
+                    }
+                },
+                {
+                    "completed": true,
+                    "bestSmallCollectibles": 0,
+                    "bestBigCollectibles": 0,
+                    "bestTimes": {
+                        "keys": [],
+                        "values": []
+                    }
+                },
+                {
+                    "completed": true,
+                    "bestSmallCollectibles": 0,
+                    "bestBigCollectibles": 0,
+                    "bestTimes": {
+                        "keys": [],
+                        "values": []
+                    }
+                }
+            ]
+        },
+        {
+            "unlocked": true,
+            "bonusLevelUnlocked": false,
+            "levels": [
+                {
+                    "completed": true,
+                    "bestSmallCollectibles": 0,
+                    "bestBigCollectibles": 0,
+                    "bestTimes": {
+                        "keys": [],
+                        "values": []
+                    }
+                },
+                {
+                    "completed": true,
+                    "bestSmallCollectibles": 0,
+                    "bestBigCollectibles": 0,
+                    "bestTimes": {
+                        "keys": [],
+                        "values": []
+                    }
+                },
+                {
+                    "completed": true,
+                    "bestSmallCollectibles": 0,
+                    "bestBigCollectibles": 0,
+                    "bestTimes": {
+                        "keys": [],
+                        "values": []
+                    }
+                },
+                {
+                    "completed": true,
+                    "bestSmallCollectibles": 0,
+                    "bestBigCollectibles": 0,
+                    "bestTimes": {
+                        "keys": [],
+                        "values": []
+                    }
+                },
+                {
+                    "completed": true,
+                    "bestSmallCollectibles": 0,
+                    "bestBigCollectibles": 0,
+                    "bestTimes": {
+                        "keys": [],
+                        "values": []
+                    }
+                },
+                {
+                    "completed": true,
+                    "bestSmallCollectibles": 0,
+                    "bestBigCollectibles": 0,
+                    "bestTimes": {
+                        "keys": [],
+                        "values": []
+                    }
+                }
+            ]
+        },
+        {
+            "unlocked": true,
+            "bonusLevelUnlocked": false,
+            "levels": [
+                {
+                    "completed": true,
+                    "bestSmallCollectibles": 0,
+                    "bestBigCollectibles": 0,
+                    "bestTimes": {
+                        "keys": [],
+                        "values": []
+                    }
+                },
+                {
+                    "completed": true,
+                    "bestSmallCollectibles": 0,
+                    "bestBigCollectibles": 0,
+                    "bestTimes": {
+                        "keys": [],
+                        "values": []
+                    }
+                },
+                {
+                    "completed": true,
+                    "bestSmallCollectibles": 0,
+                    "bestBigCollectibles": 0,
+                    "bestTimes": {
+                        "keys": [],
+                        "values": []
+                    }
+                },
+                {
+                    "completed": true,
+                    "bestSmallCollectibles": 0,
+                    "bestBigCollectibles": 0,
+                    "bestTimes": {
+                        "keys": [],
+                        "values": []
+                    }
+                },
+                {
+                    "completed": true,
+                    "bestSmallCollectibles": 0,
+                    "bestBigCollectibles": 0,
+                    "bestTimes": {
+                        "keys": [],
+                        "values": []
+                    }
+                },
+                {
+                    "completed": true,
+                    "bestSmallCollectibles": 0,
+                    "bestBigCollectibles": 0,
+                    "bestTimes": {
+                        "keys": [],
+                        "values": []
+                    }
+                }
+            ]
+        },
+        {
+            "unlocked": true,
+            "bonusLevelUnlocked": false,
+            "levels": [
+                {
+                    "completed": true,
+                    "bestSmallCollectibles": 0,
+                    "bestBigCollectibles": 0,
+                    "bestTimes": {
+                        "keys": [],
+                        "values": []
+                    }
+                },
+                {
+                    "completed": true,
+                    "bestSmallCollectibles": 0,
+                    "bestBigCollectibles": 0,
+                    "bestTimes": {
+                        "keys": [],
+                        "values": []
+                    }
+                },
+                {
+                    "completed": true,
+                    "bestSmallCollectibles": 0,
+                    "bestBigCollectibles": 0,
+                    "bestTimes": {
+                        "keys": [],
+                        "values": []
+                    }
+                },
+                {
+                    "completed": true,
+                    "bestSmallCollectibles": 0,
+                    "bestBigCollectibles": 0,
+                    "bestTimes": {
+                        "keys": [],
+                        "values": []
+                    }
+                },
+                {
+                    "completed": true,
+                    "bestSmallCollectibles": 0,
+                    "bestBigCollectibles": 0,
+                    "bestTimes": {
+                        "keys": [],
+                        "values": []
+                    }
+                },
+                {
+                    "completed": true,
+                    "bestSmallCollectibles": 0,
+                    "bestBigCollectibles": 0,
+                    "bestTimes": {
+                        "keys": [],
+                        "values": []
+                    }
+                }
+            ]
+        }
+    ],
+    "unlockedMoveIds": [],
+    "spendableSmallCollectibles": 0
+}

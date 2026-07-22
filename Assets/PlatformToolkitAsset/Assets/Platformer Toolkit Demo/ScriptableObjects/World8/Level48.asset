@@ -13,8 +13,12 @@ MonoBehaviour:
   m_Name: Level48
   m_EditorClassIdentifier: 
   levelId: 48
-  sceneName: Last6
-  totalSmallCollectibles: 0
-  totalBigCollectibles: 0
+  sceneName: Level48
+  totalSmallCollectibles: 150
+  totalBigCollectibles: 5
   availableTrialTypes: 
+  carryMusicToWorldMap: 0
+  carryMusicToNextScene: 0
+  levelName: Level48
+  levelMusic: {fileID: 0}
   moveUnlockedHere: {fileID: 0}

@@ -42,6 +42,7 @@ namespace GMTK.PlatformerToolkit {
 
         // Called by anything that wants to transition to a new scene
         public void TransitionToScene(string sceneName) {
+            //Debug.Log("Transitioning to scene " + sceneName);
             TransitionOut(() => SceneManager.LoadScene(sceneName));
         }
 

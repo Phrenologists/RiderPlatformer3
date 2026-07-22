@@ -13,8 +13,12 @@ MonoBehaviour:
   m_Name: Level40
   m_EditorClassIdentifier: 
   levelId: 40
-  sceneName: Heaven4
-  totalSmallCollectibles: 0
-  totalBigCollectibles: 0
+  sceneName: Level40
+  totalSmallCollectibles: 150
+  totalBigCollectibles: 5
   availableTrialTypes: 
+  carryMusicToWorldMap: 0
+  carryMusicToNextScene: 0
+  levelName: Level40
+  levelMusic: {fileID: 0}
   moveUnlockedHere: {fileID: 0}

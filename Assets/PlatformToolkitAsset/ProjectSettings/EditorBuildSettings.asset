@@ -14,5 +14,173 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Platformer Toolkit Demo/Scenes/WorldMap.unity
     guid: 0d4bd9ff99d6c86438eaddd2f6df5d1c
+  - enabled: 1
+    path: Assets/Platformer Toolkit Demo/Scenes/KingdomMaps/Kingdom1.unity
+    guid: c931c5ac1f624a440a04e54c2f8bd37c
+  - enabled: 1
+    path: Assets/Platformer Toolkit Demo/Scenes/KingdomMaps/Kingdom2.unity
+    guid: 8da1716c5b9ba384191ee7b1e57cc925
+  - enabled: 1
+    path: Assets/Platformer Toolkit Demo/Scenes/KingdomMaps/Kingdom3.unity
+    guid: b97f47f2c53bb664186aad0364200ac6
+  - enabled: 1
+    path: Assets/Platformer Toolkit Demo/Scenes/KingdomMaps/Kingdom4.unity
+    guid: 17c7f416a3a789b44a676b0d19fbf4b1
+  - enabled: 1
+    path: Assets/Platformer Toolkit Demo/Scenes/KingdomMaps/Kingdom5.unity
+    guid: 61393830eb538214c94a8baead10a626
+  - enabled: 1
+    path: Assets/Platformer Toolkit Demo/Scenes/KingdomMaps/Kingdom6.unity
+    guid: 1cf37b00165aac642aaf9942d56b75f8
+  - enabled: 1
+    path: Assets/Platformer Toolkit Demo/Scenes/KingdomMaps/Kingdom7.unity
+    guid: 53662dee8934f3b46953bddb7c80806a
+  - enabled: 1
+    path: Assets/Platformer Toolkit Demo/Scenes/KingdomMaps/Kingdom8.unity
+    guid: fda2ff4b26d0f4f448325d39251c8380
+  - enabled: 1
+    path: Assets/Platformer Toolkit Demo/Scenes/World1/Level1.unity
+    guid: 2b929ff5926a6c04097511fe951666fe
+  - enabled: 1
+    path: Assets/Platformer Toolkit Demo/Scenes/World1/Level2.unity
+    guid: 3415f4c0d31663b4494bf0f3890d7c67
+  - enabled: 1
+    path: Assets/Platformer Toolkit Demo/Scenes/World1/Level3.unity
+    guid: df41c42d0beecc3439bb42484a968201
+  - enabled: 1
+    path: Assets/Platformer Toolkit Demo/Scenes/World1/Level4.unity
+    guid: f58977713fb1d774eba05616b1cee8ed
+  - enabled: 1
+    path: Assets/Platformer Toolkit Demo/Scenes/World1/Level5.unity
+    guid: 357a2b349c62d8f4a927362cec2bd271
+  - enabled: 1
+    path: Assets/Platformer Toolkit Demo/Scenes/World1/Level6.unity
+    guid: 1745322ec972ddd4eacd51f7bf4753bd
+  - enabled: 1
+    path: Assets/Platformer Toolkit Demo/Scenes/World2/Level7.unity
+    guid: 4f598738daf16794ea124df7eeb97ef8
+  - enabled: 1
+    path: Assets/Platformer Toolkit Demo/Scenes/World2/Level8.unity
+    guid: bd27538898f3fc14a9c449b1c5fe52f9
+  - enabled: 1
+    path: Assets/Platformer Toolkit Demo/Scenes/World2/Level9.unity
+    guid: f9056bcfb17aa684f90cbe860d834a37
+  - enabled: 1
+    path: Assets/Platformer Toolkit Demo/Scenes/World2/Level10.unity
+    guid: d51521807a4cd9c4281f6bc4965b5ee1
+  - enabled: 1
+    path: Assets/Platformer Toolkit Demo/Scenes/World2/Level11.unity
+    guid: 11b4719b36b66304c9554af0824b5369
+  - enabled: 1
+    path: Assets/Platformer Toolkit Demo/Scenes/World2/Level12.unity
+    guid: da85c2739652b0f4089f20ae75e28104
+  - enabled: 1
+    path: Assets/Platformer Toolkit Demo/Scenes/World3/Level13.unity
+    guid: 19783b963b8d46c41bcaaa2587f5d8ac
+  - enabled: 1
+    path: Assets/Platformer Toolkit Demo/Scenes/World3/Level14.unity
+    guid: a39df754dd41f2f4389e9b2c2b64e2ad
+  - enabled: 1
+    path: Assets/Platformer Toolkit Demo/Scenes/World3/Level15.unity
+    guid: bb24cb41793b1c3418b6419fd6a94414
+  - enabled: 1
+    path: Assets/Platformer Toolkit Demo/Scenes/World3/Level16.unity
+    guid: 0c6c7e680dd51c64695d93cf377c1308
+  - enabled: 1
+    path: Assets/Platformer Toolkit Demo/Scenes/World3/Level17.unity
+    guid: 11f847b19810b39438f35c54a2b46c5a
+  - enabled: 1
+    path: Assets/Platformer Toolkit Demo/Scenes/World3/Level18.unity
+    guid: c9b573172c6aae84e98b9be85e0c204d
+  - enabled: 1
+    path: Assets/Platformer Toolkit Demo/Scenes/World4/Level19.unity
+    guid: 1afafc6a8cd39fb4ebbc43745a6cca9b
+  - enabled: 1
+    path: Assets/Platformer Toolkit Demo/Scenes/World4/Level20.unity
+    guid: 685edd14da02a2e4db987430d64e5dca
+  - enabled: 1
+    path: Assets/Platformer Toolkit Demo/Scenes/World4/Level21.unity
+    guid: 5977e4227f53bb34593b1ead57ed01b0
+  - enabled: 1
+    path: Assets/Platformer Toolkit Demo/Scenes/World4/Level22.unity
+    guid: 1417be2a2a46bb64787ed68b0a145b9c
+  - enabled: 1
+    path: Assets/Platformer Toolkit Demo/Scenes/World4/Level23.unity
+    guid: 55c34c16e0e1acb42a69f8fbb0ec4e39
+  - enabled: 1
+    path: Assets/Platformer Toolkit Demo/Scenes/World4/Level24.unity
+    guid: 2bb20ae6c85c760439c88deb0f2c28a3
+  - enabled: 1
+    path: Assets/Platformer Toolkit Demo/Scenes/World5/Level25.unity
+    guid: 31e900951106eb148a2fdb6885acb214
+  - enabled: 1
+    path: Assets/Platformer Toolkit Demo/Scenes/World5/Level26.unity
+    guid: 0d19e006342ec544aba8312bda4f540a
+  - enabled: 1
+    path: Assets/Platformer Toolkit Demo/Scenes/World5/Level27.unity
+    guid: b682ea25e572d8e4082e19685b14f567
+  - enabled: 1
+    path: Assets/Platformer Toolkit Demo/Scenes/World5/Level28.unity
+    guid: a2ae6e8f33971c54db026e6ec917a8fc
+  - enabled: 1
+    path: Assets/Platformer Toolkit Demo/Scenes/World5/Level29.unity
+    guid: d9e2b916a01a74e4da3d43ff4b21d817
+  - enabled: 1
+    path: Assets/Platformer Toolkit Demo/Scenes/World5/Level30.unity
+    guid: 8c07ad4cb934e6a42b21ebfc982c7060
+  - enabled: 1
+    path: Assets/Platformer Toolkit Demo/Scenes/World6/Level31.unity
+    guid: bc3ce8aee5fceed4c8aa784b82c6aff8
+  - enabled: 1
+    path: Assets/Platformer Toolkit Demo/Scenes/World6/Level32.unity
+    guid: fa3bca4310617d14abaa4c0368e4baed
+  - enabled: 1
+    path: Assets/Platformer Toolkit Demo/Scenes/World6/Level33.unity
+    guid: 04547109d75e27246bc9a7ac77472a13
+  - enabled: 1
+    path: Assets/Platformer Toolkit Demo/Scenes/World6/Level34.unity
+    guid: 94147ed78fc46de4a806ddb2f1ff0455
+  - enabled: 1
+    path: Assets/Platformer Toolkit Demo/Scenes/World6/Level35.unity
+    guid: e1538732ff0ae0c4dbf0033ef78d035f
+  - enabled: 1
+    path: Assets/Platformer Toolkit Demo/Scenes/World6/Level36.unity
+    guid: 174347ade32059c42909f08b206f843f
+  - enabled: 1
+    path: Assets/Platformer Toolkit Demo/Scenes/World7/Level37.unity
+    guid: 82dde5114381c984a9bb8ae56ee47c84
+  - enabled: 1
+    path: Assets/Platformer Toolkit Demo/Scenes/World7/Level38.unity
+    guid: c369cb83405efc24f94b249143501297
+  - enabled: 1
+    path: Assets/Platformer Toolkit Demo/Scenes/World7/Level39.unity
+    guid: 901d23ae90112bb498c55394d1c38ed8
+  - enabled: 1
+    path: Assets/Platformer Toolkit Demo/Scenes/World7/Level40.unity
+    guid: 7f518f6a5709b314b828d25a967b0c6e
+  - enabled: 1
+    path: Assets/Platformer Toolkit Demo/Scenes/World7/Level41.unity
+    guid: 43fc278b67a0cc5438673a1700e22aa1
+  - enabled: 1
+    path: Assets/Platformer Toolkit Demo/Scenes/World7/Level42.unity
+    guid: 53aff45c2d9e0474ea8081fe9d5bd669
+  - enabled: 1
+    path: Assets/Platformer Toolkit Demo/Scenes/World8/Level43.unity
+    guid: d8f0e60353d085b4097890586621bfbb
+  - enabled: 1
+    path: Assets/Platformer Toolkit Demo/Scenes/World8/Level44.unity
+    guid: 5d165cbe57a11604d99d40f86892875b
+  - enabled: 1
+    path: Assets/Platformer Toolkit Demo/Scenes/World8/Level45.unity
+    guid: 0294dcb48df8ba54dbfc486947838e95
+  - enabled: 1
+    path: Assets/Platformer Toolkit Demo/Scenes/World8/Level46.unity
+    guid: 73679cced33465b4f9a3ecd0bee1ad86
+  - enabled: 1
+    path: Assets/Platformer Toolkit Demo/Scenes/World8/Level47.unity
+    guid: d97bb7940ce9ac944a592b38084defca
+  - enabled: 1
+    path: Assets/Platformer Toolkit Demo/Scenes/World8/Level48.unity
+    guid: 9265f30cda63d744aaad0e0ef75efa16
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 45eb6326ff4674853ad9da25672d778b, type: 2}

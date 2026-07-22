@@ -13,8 +13,12 @@ MonoBehaviour:
   m_Name: Level22
   m_EditorClassIdentifier: 
   levelId: 22
-  sceneName: Ice4
-  totalSmallCollectibles: 0
-  totalBigCollectibles: 0
+  sceneName: Level22
+  totalSmallCollectibles: 150
+  totalBigCollectibles: 5
   availableTrialTypes: 
+  carryMusicToWorldMap: 0
+  carryMusicToNextScene: 0
+  levelName: Level22
+  levelMusic: {fileID: 0}
   moveUnlockedHere: {fileID: 0}

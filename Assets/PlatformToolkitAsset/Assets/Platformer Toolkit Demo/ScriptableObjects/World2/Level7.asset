@@ -13,8 +13,12 @@ MonoBehaviour:
   m_Name: Level7
   m_EditorClassIdentifier: 
   levelId: 7
-  sceneName: Desert1
-  totalSmallCollectibles: 0
-  totalBigCollectibles: 0
+  sceneName: Level7
+  totalSmallCollectibles: 150
+  totalBigCollectibles: 5
   availableTrialTypes: 
+  carryMusicToWorldMap: 0
+  carryMusicToNextScene: 0
+  levelName: Level7
+  levelMusic: {fileID: 0}
   moveUnlockedHere: {fileID: 0}

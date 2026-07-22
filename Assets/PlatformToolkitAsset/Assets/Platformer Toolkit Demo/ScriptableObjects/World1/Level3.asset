@@ -13,8 +13,12 @@ MonoBehaviour:
   m_Name: Level3
   m_EditorClassIdentifier: 
   levelId: 3
-  sceneName: Grass3
-  totalSmallCollectibles: 0
-  totalBigCollectibles: 0
+  sceneName: Level3
+  totalSmallCollectibles: 150
+  totalBigCollectibles: 5
   availableTrialTypes: 
+  carryMusicToWorldMap: 0
+  carryMusicToNextScene: 0
+  levelName: Level3
+  levelMusic: {fileID: 0}
   moveUnlockedHere: {fileID: 0}

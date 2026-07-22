@@ -22,4 +22,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2275f25ee87ca4e47b3a5e05e92f27f5, type: 2}
   - {fileID: 11400000, guid: ff7bb9183dac7ba47899cca44c36a31b, type: 2}
   bonusLevels: []
+  kingdomMapSceneName: Kingdom4
+  levelUnlockRequirements: 
   bonusUnlockLevelIndex: 0

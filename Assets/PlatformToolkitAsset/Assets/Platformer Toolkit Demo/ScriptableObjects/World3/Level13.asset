@@ -13,8 +13,12 @@ MonoBehaviour:
   m_Name: Level13
   m_EditorClassIdentifier: 
   levelId: 13
-  sceneName: Water1
-  totalSmallCollectibles: 0
-  totalBigCollectibles: 0
+  sceneName: Level13
+  totalSmallCollectibles: 150
+  totalBigCollectibles: 5
   availableTrialTypes: 
+  carryMusicToWorldMap: 0
+  carryMusicToNextScene: 0
+  levelName: Level13
+  levelMusic: {fileID: 0}
   moveUnlockedHere: {fileID: 0}

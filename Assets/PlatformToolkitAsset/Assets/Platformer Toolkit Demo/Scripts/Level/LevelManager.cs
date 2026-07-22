@@ -10,6 +10,8 @@ namespace GMTK.PlatformerToolkit
     public class LevelManager : MonoBehaviour
     {
         [SerializeField] private AudioClip levelMusic;
+        
+        [SerializeField] private LevelDefinition levelDefinition;
 
         public static LevelManager Instance { get; private set; }
 
@@ -33,16 +35,18 @@ namespace GMTK.PlatformerToolkit
 
         private void Start()
         {
+            GameManager.Instance.StartLevel(GameManager.Instance.CurrentKingdomIndex, GameManager.Instance.CurrentLevelIndex);
 
-            if (GameManager.Instance.Session == null)
-            {
+            //if (GameManager.Instance.Session == null)
+            //{
                 // Find which kingdom/level index this scene corresponds to,
                 // or just use 0,0 as a placeholder for testing
-                GameManager.Instance.CreateTestSession();
+                //GameManager.Instance.CreateTestSession();
+                //GameManager.Instance.StartLevel(GameManager.Instance.CurrentKingdomIndex, GameManager.Instance.CurrentLevelIndex);
                 // Reset the UI to zero on level load
                 
 
-            }
+            //}
             if (levelMusic != null && !MusicManager.Instance.MusicWasCarriedIn) {
                 MusicManager.Instance.PlayTrack(levelMusic);
             }

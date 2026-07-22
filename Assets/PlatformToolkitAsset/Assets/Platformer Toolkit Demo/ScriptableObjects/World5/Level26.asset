@@ -13,8 +13,12 @@ MonoBehaviour:
   m_Name: Level26
   m_EditorClassIdentifier: 
   levelId: 26
-  sceneName: Shadow2
-  totalSmallCollectibles: 0
-  totalBigCollectibles: 0
+  sceneName: Level26
+  totalSmallCollectibles: 150
+  totalBigCollectibles: 5
   availableTrialTypes: 
+  carryMusicToWorldMap: 0
+  carryMusicToNextScene: 0
+  levelName: Level26
+  levelMusic: {fileID: 0}
   moveUnlockedHere: {fileID: 0}
