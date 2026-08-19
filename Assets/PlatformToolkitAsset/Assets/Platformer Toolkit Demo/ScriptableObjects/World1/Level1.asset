@@ -16,7 +16,7 @@ MonoBehaviour:
   sceneName: Level1
   totalSmallCollectibles: 150
   totalBigCollectibles: 5
-  availableTrialTypes: 
+  availableTrialTypes: 00000000010000000200000003000000
   carryMusicToWorldMap: 0
   carryMusicToNextScene: 0
   levelName: Level1

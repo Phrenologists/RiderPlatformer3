@@ -37,8 +37,8 @@ namespace GMTK.PlatformerToolkit
         {
             GameManager.Instance.StartLevel(GameManager.Instance.CurrentKingdomIndex, GameManager.Instance.CurrentLevelIndex);
 
-            //if (GameManager.Instance.Session == null)
-            //{
+            if (GameManager.Instance.Session == null)
+            {
                 // Find which kingdom/level index this scene corresponds to,
                 // or just use 0,0 as a placeholder for testing
                 //GameManager.Instance.CreateTestSession();
@@ -46,7 +46,7 @@ namespace GMTK.PlatformerToolkit
                 // Reset the UI to zero on level load
                 
 
-            //}
+            }
             if (levelMusic != null && !MusicManager.Instance.MusicWasCarriedIn) {
                 MusicManager.Instance.PlayTrack(levelMusic);
             }
