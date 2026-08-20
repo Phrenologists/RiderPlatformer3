@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6543353462343105065}
   - component: {fileID: 6543353462343105070}
   - component: {fileID: 7894531662314626608}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: BreakableBlock
   m_TagString: Destructible
   m_Icon: {fileID: 0}
@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0.4908738, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

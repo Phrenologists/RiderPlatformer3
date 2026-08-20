@@ -161,7 +161,7 @@ namespace GMTK.PlatformerToolkit {
             jumpAction.canceled += mountJump.OnJump;
             
             mountBody.velocity = new Vector2(playerBody.velocity.x, 0f);
-            mountMovement.directionX = moveAction.ReadValue<float>();
+            mountMovement.directionX = moveAction.ReadValue<Vector2>().x;
 
             playerMovement.directionX = 0f;
             playerBody.bodyType = RigidbodyType2D.Kinematic;
@@ -202,7 +202,7 @@ namespace GMTK.PlatformerToolkit {
             playerCollider.isTrigger = false;
 
             playerBody.velocity = new Vector2(mountBody.velocity.x, dismountJumpForce);
-            playerMovement.directionX = moveAction.ReadValue<float>();
+            playerMovement.directionX = moveAction.ReadValue<Vector2>().x;
 
             playerMovement.enabled = true;
             playerJump.enabled = true;

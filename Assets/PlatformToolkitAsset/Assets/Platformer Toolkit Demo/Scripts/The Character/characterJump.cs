@@ -11,6 +11,7 @@ namespace GMTK.PlatformerToolkit {
         private characterGround ground;
         [HideInInspector] public Vector2 velocity;
         private characterJuice juice;
+        private characterMovement movement;
 
 
         [Header("Jumping Stats")]
@@ -54,6 +55,9 @@ namespace GMTK.PlatformerToolkit {
         [SerializeField, Range(1f, 20f)]
         [Tooltip("How quickly gravity fades back in after the apex")]
         public float apexGravityFadeInSpeed = 8f;
+        
+        [Header("One Way Platforms")]
+        [SerializeField] private float dropDownInputThreshold = -0.5f;
 
         private float apexHangCounter = 0f;
         private bool wasRising = false; // tracks if we were going up last frame
@@ -64,6 +68,7 @@ namespace GMTK.PlatformerToolkit {
             body = GetComponent<Rigidbody2D>();
             ground = GetComponent<characterGround>();
             juice = GetComponentInChildren<characterJuice>();
+            movement= GetComponent<characterMovement>();
             defaultGravityScale = 1f;
         }
 
@@ -74,13 +79,49 @@ namespace GMTK.PlatformerToolkit {
                 //When we press the jump button, tell the script that we desire a jump.
                 //Also, use the started and canceled contexts to know if we're currently holding the button
                 if (context.started) {
+                    float verticalInput = GetVerticalInput();
+                    if (verticalInput < dropDownInputThreshold && onGround) {
+                        TryDropThrough();
+                        //Debug.Log("Passing through");
+                        return; // Don't jump, drop instead
+                    }
                     desiredJump = true;
                     pressingJump = true;
+                    
                 }
 
                 if (context.canceled) {
                     pressingJump = false;
                 }
+            }
+        }
+        
+        private void TryDropThrough() {
+            Vector3 offset = ground.colliderOffset;
+            float length = ground.groundLength;
+            
+            RaycastHit2D hitLeft = Physics2D.Raycast(
+                transform.position + offset,
+                Vector2.down,
+                length,
+                ground.groundLayer
+            );
+            RaycastHit2D hitRight = Physics2D.Raycast(
+                transform.position - offset,
+                Vector2.down,
+                length,
+                ground.groundLayer
+            );
+
+            // Use whichever hit something
+            RaycastHit2D hit = hitLeft.collider != null ? hitLeft : hitRight;
+
+            if (hit.collider != null) {
+                var platform = hit.collider.GetComponent<OneWayPlatform>();
+                if (platform != null) {
+                    platform.DropThrough();
+                }
+                // If no OneWayPlatform component, it's solid ground — do nothing
             }
         }
 
@@ -260,6 +301,14 @@ namespace GMTK.PlatformerToolkit {
         public void bounceUp(float bounceAmount) {
             //Used by the springy pad
             body.AddForce(Vector2.up * bounceAmount, ForceMode2D.Impulse);
+        }
+        private float GetVerticalInput() {
+            // Read from the Movement input action's Y axis
+            // Assumes you have access to the input action — adjust to match
+            // your input setup
+            return movement.directionY;
+            // You may need to add a directionY field to characterMovement
+            // if you don't already read vertical input there
         }
     }
 }

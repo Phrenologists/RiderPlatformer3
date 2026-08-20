@@ -27,6 +27,8 @@ namespace GMTK.PlatformerToolkit {
 
         [Header("Calculations")]
         public float directionX;
+        public float directionY { get; private set; }
+
         private Vector2 desiredVelocity;
         public Vector2 velocity;
         private float maxSpeedChange;
@@ -49,7 +51,9 @@ namespace GMTK.PlatformerToolkit {
             //The value will read -1 when pressing left, 0 when idle, and 1 when pressing right.
 
             if (movementLimiter.instance.CharacterCanMove) {
-                directionX = context.ReadValue<float>();
+                Vector2 input = context.ReadValue<Vector2>();
+                directionX = input.x;
+                directionY = input.y;
             }
         }
 

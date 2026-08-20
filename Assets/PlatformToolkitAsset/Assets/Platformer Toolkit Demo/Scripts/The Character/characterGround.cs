@@ -9,11 +9,11 @@ namespace GMTK.PlatformerToolkit {
         private bool onGround;
 
         [Header("Collider Settings")]
-        [SerializeField][Tooltip("Length of the ground-checking collider")] private float groundLength = 0.95f;
-        [SerializeField][Tooltip("Distance between the ground-checking colliders")] private Vector3 colliderOffset;
+        [SerializeField][Tooltip("Length of the ground-checking collider")] public float groundLength = 0.95f;
+        [SerializeField][Tooltip("Distance between the ground-checking colliders")] public Vector3 colliderOffset;
 
         [Header("Layer Masks")]
-        [SerializeField][Tooltip("Which layers are read as the ground")] private LayerMask groundLayer;
+        [SerializeField][Tooltip("Which layers are read as the ground")] public LayerMask groundLayer;
 
 
         private void Update() {
