@@ -33,6 +33,42 @@
                     "initialStateCheck": true
                 },
                 {
+                    "name": "Mount",
+                    "type": "Button",
+                    "id": "cf6f6776-817f-49e3-be6e-c16aaac7eb05",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ChargeLeft",
+                    "type": "Button",
+                    "id": "785c8fcb-d868-4734-9db1-52fd6557160c",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ChargeRight",
+                    "type": "Button",
+                    "id": "a0e13768-c0b4-44de-83d9-8a94348c4331",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "SwordSlash",
+                    "type": "Button",
+                    "id": "2f7807ab-216a-409f-8359-ca9bb1e69a64",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Skip",
                     "type": "Button",
                     "id": "47b7bf0f-7dd4-4eb6-936a-5dfd26e8a27f",
@@ -63,33 +99,6 @@
                     "name": "Quit",
                     "type": "Button",
                     "id": "f1352a80-a7ab-4470-9f2b-635fe482ef58",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Mount",
-                    "type": "Button",
-                    "id": "cf6f6776-817f-49e3-be6e-c16aaac7eb05",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "ChargeLeft",
-                    "type": "Button",
-                    "id": "785c8fcb-d868-4734-9db1-52fd6557160c",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "ChargeRight",
-                    "type": "Button",
-                    "id": "a0e13768-c0b4-44de-83d9-8a94348c4331",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -235,17 +244,6 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "",
-                    "id": "33a5bbe5-523c-4a13-b0aa-39de738c887c",
-                    "path": "<Gamepad>/leftStick/x",
-                    "interactions": "",
-                    "processors": "Scale(factor=1000),Clamp(min=-1,max=1)",
-                    "groups": "Gamepad",
-                    "action": "Movement",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
                     "name": "D-Pad",
                     "id": "ca2cbbb3-cd55-4c7b-9010-858d42f663ba",
                     "path": "2DVector",
@@ -293,6 +291,61 @@
                     "name": "down",
                     "id": "252045f5-b15d-4890-8c39-7d67810132ec",
                     "path": "<Gamepad>/dpad/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Movement",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "LeftStick",
+                    "id": "aac0e9b6-52f8-4c45-abd9-c3ab3e93cf8f",
+                    "path": "2DVector",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Movement",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "up",
+                    "id": "64b756b8-a4e9-4a14-a48e-d10957adfc6f",
+                    "path": "<Gamepad>/leftStick/up",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Movement",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "1d948325-91fb-448a-9a49-3b0d20f7146e",
+                    "path": "<Gamepad>/leftStick/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Movement",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "99b8f486-f83d-4121-8a97-94d93903595a",
+                    "path": "<Gamepad>/leftStick/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Movement",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "9249fe15-c9fc-4dd9-a617-0ddc68c4b337",
+                    "path": "<Gamepad>/leftStick/right",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -429,72 +482,6 @@
                     "processors": "",
                     "groups": "",
                     "action": "Quit",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "dcb587f3-fab0-42f3-9372-b41c44158f93",
-                    "path": "<Keyboard>/ctrl",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Mount",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "8cee2be6-1165-4641-be6b-6ded6ea29790",
-                    "path": "<Gamepad>/leftTrigger",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Mount",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "a8deac7f-ac1c-439f-8f9f-f9de3aae3c8f",
-                    "path": "<Keyboard>/q",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "ChargeLeft",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "36a1d0f0-7edc-489a-850c-33dc14b20a84",
-                    "path": "<Gamepad>/leftShoulder",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "ChargeLeft",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "ac675365-fb96-4666-b3e1-a4ff8642e9a5",
-                    "path": "<Keyboard>/e",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "ChargeRight",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "12543793-0395-4e91-828c-4c349405fd22",
-                    "path": "<Gamepad>/rightShoulder",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "ChargeRight",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -759,6 +746,94 @@
                     "processors": "",
                     "groups": "",
                     "action": "MapBack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "38d81aad-ecda-48d4-a12d-618bb7f040b4",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SwordSlash",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "12fbbc7a-9a46-403f-9781-47e17acf1abe",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SwordSlash",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "dcb587f3-fab0-42f3-9372-b41c44158f93",
+                    "path": "<Keyboard>/ctrl",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Mount",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8cee2be6-1165-4641-be6b-6ded6ea29790",
+                    "path": "<Gamepad>/leftTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Mount",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a8deac7f-ac1c-439f-8f9f-f9de3aae3c8f",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ChargeLeft",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "36a1d0f0-7edc-489a-850c-33dc14b20a84",
+                    "path": "<Gamepad>/leftShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ChargeLeft",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ac675365-fb96-4666-b3e1-a4ff8642e9a5",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ChargeRight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "12543793-0395-4e91-828c-4c349405fd22",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ChargeRight",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

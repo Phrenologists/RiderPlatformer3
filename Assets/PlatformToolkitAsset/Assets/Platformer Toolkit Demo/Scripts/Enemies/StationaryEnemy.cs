@@ -25,17 +25,30 @@ namespace GMTK.PlatformerToolkit {
         protected Rigidbody2D body;
         protected Collider2D col;
         protected bool isDefeated = false;
+        private EnemyHealth health;
+        
+        private static readonly int HitFromLeft = Animator.StringToHash("HitFromLeft");
+        private static readonly int HitFromRight = Animator.StringToHash("HitFromRight");
+        private static readonly int HitFromAbove = Animator.StringToHash("HitFromAbove");
+        private static readonly int Defeated = Animator.StringToHash("Defeated");
+        private static readonly int Hurt = Animator.StringToHash("Hurt");
+        private static readonly int Idle = Animator.StringToHash("Idle");
 
         protected virtual void Awake() {
             body = GetComponent<Rigidbody2D>();
             col = GetComponent<Collider2D>();
+            health = GetComponent<EnemyHealth>();
 
             // Enemies start kinematic so they stay in place
             body.bodyType = RigidbodyType2D.Kinematic;
+            
+            if (animator != null)
+                animator.Play(Idle);
         }
 
         private void OnCollisionEnter2D(Collision2D collision) {
-            if (isDefeated) return;
+            //if (isDefeated) return;
+            if (health == null || health.IsDead) return;
             if (!IsPlayerLayer(collision.gameObject.layer)) return;
 
             // Determine contact direction from the collision normal
@@ -60,9 +73,19 @@ namespace GMTK.PlatformerToolkit {
 
             OnContactAnimation(direction);
         }
+        
+        public void OnHurt() {
+            if (animator != null)
+                animator.SetTrigger(Hurt);
+        }
+
+        // Called by EnemyHealth for slash death
+        public void OnDeathAnimation() {
+            if (animator != null)
+                animator.SetTrigger(Defeated);
+        }
 
         // Override in subclasses to trigger specific animations
-        protected virtual void OnContactAnimation(ContactDirection direction) { }
 
         // Called by CharacterMount when a charge hits this enemy
         public void Defeat(float chargeDirection) {
@@ -82,6 +105,12 @@ namespace GMTK.PlatformerToolkit {
                 new Vector2(chargeDirection * knockbackForce, knockbackUpForce),
                 ForceMode2D.Impulse
             );
+            
+            if (animator != null)
+                animator.SetTrigger(Defeated);
+
+            if (defeatSound != null)
+                defeatSound.Play();
 
             OnDefeatAnimation();
 
@@ -99,6 +128,18 @@ namespace GMTK.PlatformerToolkit {
 
         // Override in subclasses to trigger defeat animation
         protected virtual void OnDefeatAnimation() { }
+        
+        protected virtual void OnContactAnimation(ContactDirection direction) {
+            if (animator == null) return;
+            switch (direction) {
+                case ContactDirection.FromLeft:
+                    animator.SetTrigger(HitFromLeft); break;
+                case ContactDirection.FromRight:
+                    animator.SetTrigger(HitFromRight); break;
+                case ContactDirection.FromAbove:
+                    animator.SetTrigger(HitFromAbove); break;
+            }
+        }
 
         protected ContactDirection GetContactDirection(Vector2 normal) {
             // The normal points FROM the enemy TO the player, so we invert it
