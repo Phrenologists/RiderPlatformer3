@@ -26,8 +26,13 @@ namespace GMTK.PlatformerToolkit {
 
         private void Collect() {
             collected = true;
+            
+            int value = MultiplierManager.Instance != null
+                ? MultiplierManager.Instance.GetCollectibleValue()
+                : 1;
 
-            GameManager.Instance.Session.SmallCollectiblesThisRun++;
+
+            GameManager.Instance.Session.SmallCollectiblesThisRun += value;
 
             // Tell the UI to update
             CollectibleUI.Instance.UpdateSmallCount(

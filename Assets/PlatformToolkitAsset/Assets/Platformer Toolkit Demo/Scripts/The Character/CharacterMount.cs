@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -213,6 +214,7 @@ namespace GMTK.PlatformerToolkit {
         private void TryBeginMountedDash(float direction) {
             if (cooldownTimer > 0f) return;
             if (chargeState != ChargeState.Idle) return;
+            if (isBouncing) return;
 
             chargeDirection = direction;
             chargeTimer = mountedWindupDuration;
@@ -294,7 +296,9 @@ namespace GMTK.PlatformerToolkit {
         // ─── Destructible Objects ────────────────────────────────────────
 
         private void OnCollisionEnter2D(Collision2D collision) {
-            if (isCharging == false) return;
+            //if (isCharging == false) return;
+            if (chargeState != ChargeState.Charging) return;
+
 
             if (collision.gameObject.CompareTag("Destructible"))
             {
@@ -310,15 +314,53 @@ namespace GMTK.PlatformerToolkit {
                 
                 // Don't end the dash — let it continue through multiple objects
             } 
-            else if (collision.gameObject.TryGetComponent<StationaryEnemy>(out var enemy))
+            //else if (collision.gameObject.TryGetComponent<StationaryEnemy>(out var enemy))
+            //{
+                //enemy.Defeat(chargeDirection);
+            //}
+            
+            else if (collision.gameObject.TryGetComponent<EnemyHealth>(out var health))
             {
-                enemy.Defeat(chargeDirection);
+                switch (health.ChargeResistance)
+                {
+                    case ChargeResistance.None:
+                    case ChargeResistance.Partial:
+                        health.TakeDamage(AttackType.Charge, chargeDirection);
+                        // Punch through - don't end dash
+                        break;
+
+                    case ChargeResistance.Full:
+                        // Blocked - bounce mount back
+                        StartCoroutine(MountBounceBack());
+                        break;
+                }
             }
 
             else {
                 // Hit a solid wall mid-dash — stop the dash early
                 //EndMountedDash();
             }
+            
         }
+        [SerializeField] private float mountBounceBackForce = 8f;
+        [SerializeField] private float mountBounceBackDuration = 0.3f;
+        private bool isBouncing = false;
+
+        private IEnumerator MountBounceBack() {
+            EndMountedDash();
+            isBouncing = true;
+
+            // Push mount back in opposite direction of charge
+            mountBody.velocity = new Vector2(
+                -chargeDirection * mountBounceBackForce,
+                mountBody.velocity.y
+            );
+
+            yield return new WaitForSeconds(mountBounceBackDuration);
+            isBouncing = false;
+        }
+        
     }
+    
 }
+
