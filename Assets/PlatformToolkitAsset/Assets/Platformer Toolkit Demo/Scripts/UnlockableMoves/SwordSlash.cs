@@ -120,8 +120,9 @@ namespace GMTK.PlatformerToolkit {
 
             // Check for enemy
             var enemyHealth = other.GetComponent<EnemyHealth>();
-            if (enemyHealth != null && !enemyHealth.IsDead) {
-                enemyHealth.TakeDamage(AttackType.Slash, slashDirection);
+            var enemy = other.GetComponent<StationaryEnemy>();
+            enemy?.OnSlashHit(slashDirection);
+            if (enemyHealth != null && !enemyHealth.IsDead) { enemyHealth.TakeDamage(AttackType.Slash, slashDirection);
 
                 // Bounce if this was a down slash
                 if (IsDownSlash()) {

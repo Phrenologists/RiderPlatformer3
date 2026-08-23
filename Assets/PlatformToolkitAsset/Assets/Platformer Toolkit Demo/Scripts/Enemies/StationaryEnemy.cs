@@ -33,6 +33,9 @@ namespace GMTK.PlatformerToolkit {
         private static readonly int Defeated = Animator.StringToHash("Defeated");
         private static readonly int Hurt = Animator.StringToHash("Hurt");
         private static readonly int Idle = Animator.StringToHash("Idle");
+        private static readonly int ResistanceBroken = Animator.StringToHash("ResistanceBroken");
+        
+        public virtual void OnSlashHit(float slashDirection) { }
 
         protected virtual void Awake() {
             body = GetComponent<Rigidbody2D>();
@@ -83,6 +86,16 @@ namespace GMTK.PlatformerToolkit {
         public void OnDeathAnimation() {
             if (animator != null)
                 animator.SetTrigger(Defeated);
+        }
+
+        public virtual void OnResistanceChanged(ChargeResistance newResistance)
+        {
+            // Base implementation just triggers an animation
+            // Subclasses can override for more complex behaviour
+            if (animator != null && newResistance == ChargeResistance.None)
+            {
+                animator.SetTrigger(ResistanceBroken);
+            }
         }
 
         // Override in subclasses to trigger specific animations
