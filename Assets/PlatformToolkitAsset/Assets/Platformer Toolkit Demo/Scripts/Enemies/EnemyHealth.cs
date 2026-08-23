@@ -10,6 +10,9 @@ namespace GMTK.PlatformerToolkit {
         [Header("Stats")]
         [SerializeField] private int maxHealth = 3;
         [SerializeField] private ChargeResistance chargeResistance = ChargeResistance.None;
+        
+        [Header("Vulnerabilities")]
+        [SerializeField] private bool invulnerableToSlash = false;
 
         [Header("Death")]
         [SerializeField] private GameObject deathParticlePrefab;
@@ -31,11 +34,28 @@ namespace GMTK.PlatformerToolkit {
         public bool IsDead => isDead;
 
         // ── Damage ────────────────────────────────────────────────────────
+        
+        public void SetChargeResistance(ChargeResistance newResistance) {
+            chargeResistance = newResistance;
+            // Notify the enemy so it can update visuals
+            enemy?.OnResistanceChanged(chargeResistance);
+        }
+
 
         public void TakeDamage(AttackType attackType, float sourceDirection = 0f) {
             if (isDead) return;
 
             int damage = attackType == AttackType.Charge ? 3 : 1;
+            
+            if (attackType == AttackType.Slash) {
+                // Even if invulnerable, we still return here without damage
+                // The bounce is handled separately in SwordSlash — it checks
+                // for the enemy's presence, not whether damage was dealt
+                if (invulnerableToSlash) return;
+
+                ApplyDamage(1, sourceDirection, sendFlying: false);
+
+            }
 
             if (attackType == AttackType.Charge) {
                 switch (chargeResistance) {

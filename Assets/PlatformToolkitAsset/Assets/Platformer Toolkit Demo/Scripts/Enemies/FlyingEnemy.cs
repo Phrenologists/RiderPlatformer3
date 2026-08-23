@@ -11,13 +11,16 @@ namespace GMTK.PlatformerToolkit {
         [SerializeField] private Transform bottomPoint;
         [SerializeField] private float flightSpeed = 2f;
         [SerializeField] private float pauseDuration = 0.8f;
+
         // How long the enemy hovers at top and bottom before reversing
 
         [SerializeField] private float approachSlowDownDistance = 0.5f;
         // Distance from waypoint at which the enemy starts slowing down
 
-        private bool movingUp = true;
-        private bool isPaused = false;
+        [SerializeField] private Transform target;
+        [SerializeField]private bool movingUp = true;
+        [SerializeField]private bool isPaused = false;
+        [SerializeField]private bool reachedTarget = false;
 
         protected override void Awake() {
             base.Awake();
@@ -39,7 +42,7 @@ namespace GMTK.PlatformerToolkit {
                     continue;
                 }
 
-                Transform target = movingUp ? topPoint : bottomPoint;
+                target = movingUp ? topPoint : bottomPoint;
                 float distanceToTarget = Mathf.Abs(
                     transform.position.y - target.position.y
                 );
@@ -54,19 +57,20 @@ namespace GMTK.PlatformerToolkit {
                     0f,
                     direction * flightSpeed * speedMultiplier
                 );
+                
+                float desiredPosition;
+                if(movingUp)
+                    desiredPosition = target.position.y - 0.05f;
+                else
+                    desiredPosition = target.position.y + 0.05f;
 
                 // Check if we've reached (or passed) the target
-                bool reachedTarget = movingUp
-                    ? transform.position.y >= target.position.y
-                    : transform.position.y <= target.position.y;
+                reachedTarget = movingUp ? transform.position.y >= desiredPosition : transform.position.y <= desiredPosition;
 
                 if (reachedTarget) {
                     // Snap to target and pause
-                    transform.position = new Vector3(
-                        transform.position.x,
-                        target.position.y,
-                        transform.position.z
-                    );
+                    transform.position = new Vector3(transform.position.x, target.position.y, transform.position.z);
+                    Debug.Log("Reached target position");
                     body.velocity = Vector2.zero;
 
                     isPaused = true;
@@ -74,6 +78,8 @@ namespace GMTK.PlatformerToolkit {
                     isPaused = false;
 
                     movingUp = !movingUp;
+                    
+                    //target = movingUp ? topPoint : bottomPoint;
                 }
 
                 yield return null;
