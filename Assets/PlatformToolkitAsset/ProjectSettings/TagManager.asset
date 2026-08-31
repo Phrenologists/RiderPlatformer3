@@ -9,6 +9,7 @@ TagManager:
   - Destructible
   - Bounceable
   - Switch
+  - Mount
   layers:
   - Default
   - TransparentFX
@@ -20,9 +21,9 @@ TagManager:
   - Hurt
   - Kill
   - Mechanic
-  - 
-  - 
-  - 
+  - Enemy
+  - Projectile
+  - Mount
   - 
   - 
   - 

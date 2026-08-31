@@ -33,6 +33,15 @@
                     "initialStateCheck": true
                 },
                 {
+                    "name": "Powerup",
+                    "type": "Button",
+                    "id": "63db19eb-e88e-4bd8-bfd7-421e949751ba",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Mount",
                     "type": "Button",
                     "id": "cf6f6776-817f-49e3-be6e-c16aaac7eb05",
@@ -834,6 +843,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "ChargeRight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0072e64d-e190-4daf-9523-da63f484c7aa",
+                    "path": "<Keyboard>/z",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Powerup",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7cade4af-0d92-48a0-bcde-e3ce292577d9",
+                    "path": "<Gamepad>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Powerup",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

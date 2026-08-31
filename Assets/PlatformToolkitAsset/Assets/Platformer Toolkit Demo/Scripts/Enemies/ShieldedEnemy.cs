@@ -14,7 +14,7 @@ namespace GMTK.PlatformerToolkit {
         [SerializeField] private AudioSource armourBreakSound;
         [SerializeField] private GameObject armourBreakParticlePrefab;
 
-        private EnemyHealth health;
+        //private EnemyHealth health;
         private bool isArmoured = true;
 
         protected override void Awake() {
@@ -30,10 +30,11 @@ namespace GMTK.PlatformerToolkit {
                 armourVisual.SetActive(true);
         }
         
-        public override void OnSlashHit(float slashDirection) {
-            if (!isArmoured) return;
+        public override bool OnSlashHit(float slashDirection) {
+            if (!isArmoured) return false;
             // Break armour without dealing HP damage
             health.SetChargeResistance(ChargeResistance.None);
+            return true;
         }
 
         // Called by EnemyHealth when resistance changes

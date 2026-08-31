@@ -51,11 +51,14 @@ namespace GMTK.PlatformerToolkit {
 
         public void TryHurt(DamageType damageType) {
             if (hurting) return;
+            
+            var powerupManager = GetComponent<PowerupManager>();
+            if (powerupManager?.ActivePowerup is MetalPowerup) return;
 
             // Check if this damage type is blocked by current state
             if (damageType == DamageType.Enemy && isCharging) return;
 
-            Debug.Log(damageType);
+            //Debug.Log(damageType);
             
             hurting = true;
             hurtRoutine();

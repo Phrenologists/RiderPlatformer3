@@ -121,8 +121,13 @@ namespace GMTK.PlatformerToolkit {
             // Check for enemy
             var enemyHealth = other.GetComponent<EnemyHealth>();
             var enemy = other.GetComponent<StationaryEnemy>();
-            enemy?.OnSlashHit(slashDirection);
-            if (enemyHealth != null && !enemyHealth.IsDead) { enemyHealth.TakeDamage(AttackType.Slash, slashDirection);
+            bool hitConsumed = enemy != null && enemy.OnSlashHit(slashDirection);
+
+            //if (!hitConsumed) {
+           //     enemyHealth.TakeDamage(AttackType.Slash, slashDirection);
+            //}
+            //enemy?.OnSlashHit(slashDirection);
+            if (enemyHealth != null && !enemyHealth.IsDead && !hitConsumed) { enemyHealth.TakeDamage(AttackType.Slash, slashDirection);
 
                 // Bounce if this was a down slash
                 if (IsDownSlash()) {
@@ -139,8 +144,9 @@ namespace GMTK.PlatformerToolkit {
 
             // Check for switch
             if (other.CompareTag("Switch")) {
-                var sw = other.GetComponent<Switch>();
+                var sw = other.GetComponentInChildren<SwordSwitch>();
                 sw?.Activate();
+                Debug.Log("Activated the switch");
             }
         }
 

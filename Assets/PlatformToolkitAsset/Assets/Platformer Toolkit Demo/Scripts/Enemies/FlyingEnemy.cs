@@ -70,7 +70,7 @@ namespace GMTK.PlatformerToolkit {
                 if (reachedTarget) {
                     // Snap to target and pause
                     transform.position = new Vector3(transform.position.x, target.position.y, transform.position.z);
-                    Debug.Log("Reached target position");
+                    //Debug.Log("Reached target position");
                     body.velocity = Vector2.zero;
 
                     isPaused = true;
