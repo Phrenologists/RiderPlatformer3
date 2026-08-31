@@ -87,11 +87,13 @@ namespace GMTK.PlatformerToolkit {
                     }
                     desiredJump = true;
                     pressingJump = true;
+                    PowerupManager.Instance?.OnJumpStateChanged(true);
                     
                 }
 
                 if (context.canceled) {
                     pressingJump = false;
+                    PowerupManager.Instance?.OnJumpStateChanged(false);
                 }
             }
         }
@@ -134,7 +136,7 @@ namespace GMTK.PlatformerToolkit {
             bool isRising = body.velocity.y > 0.01f;
             if (wasRising && !isRising && !onGround && currentlyJumping) {
                 apexHangCounter = apexHangTime; // start the hang timer
-                Debug.Log("Peak");
+                //Debug.Log("Peak");
             }
             wasRising = isRising;
 

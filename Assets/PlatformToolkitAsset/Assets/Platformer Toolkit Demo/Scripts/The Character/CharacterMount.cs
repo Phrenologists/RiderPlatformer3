@@ -50,6 +50,12 @@ namespace GMTK.PlatformerToolkit {
         
         private characterHurt playerHurt;
         private characterHurt mountHurt;
+        
+        public bool IsMounted => isMounted;
+        
+        public Rigidbody2D GetPlayerBody() {
+            return playerBody;
+        }
 
         private void Start() {
             var playerObj = GameObject.FindWithTag("Player");
@@ -250,7 +256,7 @@ namespace GMTK.PlatformerToolkit {
             mountBody.velocity = new Vector2(chargeDirection * mountedDashSpeed, 0);
             mountHurt.isCharging = true;
             
-            Debug.Log(mountHurt.isCharging);
+            //Debug.Log(mountHurt.isCharging);
             
             mountBody.gravityScale = 0;
 
@@ -319,6 +325,17 @@ namespace GMTK.PlatformerToolkit {
                 //enemy.Defeat(chargeDirection);
             //}
             
+            else if (collision.gameObject.TryGetComponent<GuardingEnemy>(out var guard))
+            {
+                // Let the guarding enemy handle the charge hit itself
+                guard.OnChargeHit(chargeDirection);
+                // Check if the guard blocked it — if so bounce back
+                if (!guard.GetComponent<EnemyHealth>().IsDead)
+                {
+                    StartCoroutine(MountBounceBack());
+                }
+            }
+
             else if (collision.gameObject.TryGetComponent<EnemyHealth>(out var health))
             {
                 switch (health.ChargeResistance)
@@ -333,6 +350,19 @@ namespace GMTK.PlatformerToolkit {
                         // Blocked - bounce mount back
                         StartCoroutine(MountBounceBack());
                         break;
+                }
+            }
+            else if (collision.gameObject.TryGetComponent<EnemySpawner>(out var spawner))
+            {
+                // Spawner takes damage like an enemy
+                var spawnerHealth = spawner.GetComponent<EnemyHealth>();
+                if (spawnerHealth != null)
+                {
+                    spawnerHealth.TakeDamage(AttackType.Charge, chargeDirection);
+                }
+                else
+                {
+                    EndMountedDash();
                 }
             }
 

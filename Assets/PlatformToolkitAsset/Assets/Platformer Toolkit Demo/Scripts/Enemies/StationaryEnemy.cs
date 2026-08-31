@@ -25,7 +25,7 @@ namespace GMTK.PlatformerToolkit {
         protected Rigidbody2D body;
         protected Collider2D col;
         protected bool isDefeated = false;
-        private EnemyHealth health;
+        protected EnemyHealth health;
         
         private static readonly int HitFromLeft = Animator.StringToHash("HitFromLeft");
         private static readonly int HitFromRight = Animator.StringToHash("HitFromRight");
@@ -35,7 +35,10 @@ namespace GMTK.PlatformerToolkit {
         private static readonly int Idle = Animator.StringToHash("Idle");
         private static readonly int ResistanceBroken = Animator.StringToHash("ResistanceBroken");
         
-        public virtual void OnSlashHit(float slashDirection) { }
+        public virtual bool OnSlashHit(float slashDirection) {
+            // Base implementation does nothing and doesn't consume the hit
+            return false;
+        }
 
         protected virtual void Awake() {
             body = GetComponent<Rigidbody2D>();
@@ -65,7 +68,7 @@ namespace GMTK.PlatformerToolkit {
         // to add animation calls on top
         protected virtual void OnPlayerContact(GameObject player, ContactDirection direction) {
             var hurt = player.GetComponent<characterHurt>();
-            Debug.Log(player.name + " hurt");
+            //Debug.Log(player.name + " hurt");
             if (hurt != null)
             {
                 hurt.TryHurt(DamageType.Enemy);
