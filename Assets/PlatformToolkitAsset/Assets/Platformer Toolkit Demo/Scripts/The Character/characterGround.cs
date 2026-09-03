@@ -14,18 +14,32 @@ namespace GMTK.PlatformerToolkit {
 
         [Header("Layer Masks")]
         [SerializeField][Tooltip("Which layers are read as the ground")] public LayerMask groundLayer;
+        
+        [HideInInspector] public Vector2 groundCheckDirection = Vector2.down;
+        
+        public void SetGroundCheckDirection(Vector2 direction) {
+            groundCheckDirection = direction.normalized;
+        }
 
 
         private void Update() {
             //Determine if the player is stood on objects on the ground layer, using a pair of raycasts
-            onGround = Physics2D.Raycast(transform.position + colliderOffset, Vector2.down, groundLength, groundLayer) || Physics2D.Raycast(transform.position - colliderOffset, Vector2.down, groundLength, groundLayer);
+            onGround = Physics2D.Raycast(transform.position + colliderOffset, groundCheckDirection, groundLength, groundLayer) || Physics2D.Raycast(transform.position - colliderOffset, groundCheckDirection, groundLength, groundLayer);
         }
 
         private void OnDrawGizmos() {
-            //Draw the ground colliders on screen for debug purposes
-            if (onGround) { Gizmos.color = Color.green; } else { Gizmos.color = Color.red; }
-            Gizmos.DrawLine(transform.position + colliderOffset, transform.position + colliderOffset + Vector3.down * groundLength);
-            Gizmos.DrawLine(transform.position - colliderOffset, transform.position - colliderOffset + Vector3.down * groundLength);
+            if (onGround) { Gizmos.color = Color.green; }
+            else { Gizmos.color = Color.red; }
+            Gizmos.DrawLine(
+                transform.position + colliderOffset,
+                transform.position + colliderOffset
+                                   + (Vector3)groundCheckDirection * groundLength
+            );
+            Gizmos.DrawLine(
+                transform.position - colliderOffset,
+                transform.position - colliderOffset
+                + (Vector3)groundCheckDirection * groundLength
+            );
         }
 
         //Send ground detection to other scripts
