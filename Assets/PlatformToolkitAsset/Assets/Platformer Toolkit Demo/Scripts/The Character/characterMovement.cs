@@ -39,6 +39,8 @@ namespace GMTK.PlatformerToolkit {
         [Header("Current State")]
         public bool onGround;
         public bool pressingKey;
+        
+        public bool externalFlipControl = false;
 
         private void Awake() {
             //Find the character's Rigidbody and ground detection script
@@ -62,15 +64,23 @@ namespace GMTK.PlatformerToolkit {
             if (!movementLimiter.instance.CharacterCanMove) {
                 directionX = 0;
             }
+            
+            //Debug.Log(externalFlipControl);
 
-            //Used to flip the character's sprite when she changes direction
-            //Also tells us that we are currently pressing a direction button
-            if (directionX != 0) {
-                transform.localScale = new Vector3(directionX > 0 ? 1 : -1, 1, 1);
-                pressingKey = true;
-            }
-            else {
-                pressingKey = false;
+            if (!externalFlipControl)
+            {
+
+                //Used to flip the character's sprite when she changes direction
+                //Also tells us that we are currently pressing a direction button
+                if (directionX != 0)
+                {
+                    transform.localScale = new Vector3(directionX > 0 ? 1 : -1, 1, 1);
+                    pressingKey = true;
+                }
+                else
+                {
+                    pressingKey = false;
+                }
             }
 
             //Calculate's the character's desired velocity - which is the direction you are facing, multiplied by the character's maximum speed

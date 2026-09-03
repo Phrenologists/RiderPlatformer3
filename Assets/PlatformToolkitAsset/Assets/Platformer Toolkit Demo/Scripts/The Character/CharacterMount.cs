@@ -56,6 +56,11 @@ namespace GMTK.PlatformerToolkit {
         public Rigidbody2D GetPlayerBody() {
             return playerBody;
         }
+        
+        public void RotatePlayer(float angle) {
+            if (player == null) return;
+            player.rotation = Quaternion.Euler(0f, 0f, angle);
+        }
 
         private void Start() {
             var playerObj = GameObject.FindWithTag("Player");
@@ -188,6 +193,8 @@ namespace GMTK.PlatformerToolkit {
             if (chargeState != ChargeState.Idle) return;
 
             isMounted = false;
+            
+            player.rotation = Quaternion.identity;
 
             var moveAction = playerInput.actions["Movement"];
             var jumpAction = playerInput.actions["Jump"];

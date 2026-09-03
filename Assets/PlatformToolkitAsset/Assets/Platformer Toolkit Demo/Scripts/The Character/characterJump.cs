@@ -61,6 +61,12 @@ namespace GMTK.PlatformerToolkit {
 
         private float apexHangCounter = 0f;
         private bool wasRising = false; // tracks if we were going up last frame
+        
+        [Header("External Gravity Override")]
+        public bool externalGravityOverride = false;
+        
+        public Vector2 externalJumpDirection = Vector2.up;
+        public bool useExternalJumpDirection = false;
 
         void Awake() {
             //Find the character's Rigidbody and ground detection and juice scripts
@@ -173,6 +179,7 @@ namespace GMTK.PlatformerToolkit {
 
         private void setPhysics() {
             //Determine the character's gravity scale, using the stats provided. Multiply it by a gravMultiplier, used later
+            if (externalGravityOverride) return;
             Vector2 newGravity = new Vector2(0, (-2 * jumpHeight) / (timeToJumpApex * timeToJumpApex));
             body.gravityScale = (newGravity.y / Physics2D.gravity.y) * gravMultiplier;
         }
@@ -191,7 +198,9 @@ namespace GMTK.PlatformerToolkit {
                 return;
             }
 
-            calculateGravity();
+            if (!externalGravityOverride) {
+                calculateGravity();
+            }
         }
 
         private void calculateGravity() {
@@ -285,7 +294,12 @@ namespace GMTK.PlatformerToolkit {
                 }
 
                 //Apply the new jumpSpeed to the velocity. It will be sent to the Rigidbody in FixedUpdate;
-                velocity.y += jumpSpeed;
+                if (useExternalJumpDirection) {
+                    // Jump away from the surface
+                    velocity += externalJumpDirection.normalized * jumpSpeed;
+                } else {
+                    velocity.y += jumpSpeed;
+                }
                 currentlyJumping = true;
 
                 if (juice != null) {
@@ -298,6 +312,12 @@ namespace GMTK.PlatformerToolkit {
                 //If we don't have a jump buffer, then turn off desiredJump immediately after hitting jumping
                 desiredJump = false;
             }
+        }
+        public void CancelJump() {
+            currentlyJumping = false;
+            desiredJump = false;
+            jumpBufferCounter = 0;
+            pressingJump = false;
         }
 
         public void bounceUp(float bounceAmount) {
