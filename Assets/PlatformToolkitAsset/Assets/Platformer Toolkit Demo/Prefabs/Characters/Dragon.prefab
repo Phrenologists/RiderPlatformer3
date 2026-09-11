@@ -5167,6 +5167,9 @@ GameObject:
   - component: {fileID: 6022671657861841290}
   - component: {fileID: 6022671657861841289}
   - component: {fileID: 6022671657861841288}
+  - component: {fileID: 319428777}
+  - component: {fileID: 319428779}
+  - component: {fileID: 5715305092286646615}
   m_Layer: 6
   m_Name: Dragon
   m_TagString: Mount
@@ -5276,6 +5279,8 @@ MonoBehaviour:
   velocity: {x: 0, y: 0}
   onGround: 1
   pressingKey: 0
+  externalFlipControl: 0
+  currentSize: {x: 1, y: 1, z: 1}
 --- !u!114 &6022671657861841292
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5311,6 +5316,9 @@ MonoBehaviour:
   apexGravityFadeOutSpeed: 10
   apexGravityFadeInSpeed: 8
   dropDownInputThreshold: -0.5
+  externalGravityOverride: 0
+  externalJumpDirection: {x: 0, y: 1}
+  useExternalJumpDirection: 0
 --- !u!114 &6022671657861841291
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5345,6 +5353,7 @@ MonoBehaviour:
   playerGrounded: 0
   jumpLine: {fileID: 0}
   cameraFalling: 0
+  externalRotationControl: 0
 --- !u!114 &6022671657861841290
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5362,6 +5371,7 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 392
+  groundCheckDirection: {x: 0, y: -1}
 --- !u!114 &6022671657861841289
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5422,6 +5432,53 @@ MonoBehaviour:
   unmountedChargeSpeed: 15
   mountBounceBackForce: 8
   mountBounceBackDuration: 0.3
+--- !u!114 &319428777
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6022671657861841303}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de692b434ad35ef4daafe9ae5355b773, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mountMovement: {fileID: 6022671657861841293}
+  mountJump: {fileID: 6022671657861841292}
+  mountBody: {fileID: 6022671657861841280}
+--- !u!114 &319428779
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6022671657861841303}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92a8ff09602fd734ebbad02fa0822537, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lockRotation: 0
+  lockedAngle: 270
+--- !u!114 &5715305092286646615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6022671657861841303}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4be6a76a85ee65545bbc36d28953a981, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stickyLayers:
+    serializedVersion: 2
+    m_Bits: 521
+  detectionDistance: 0.3
+  halfWidth: 0.5
+  halfHeight: 0.5
 --- !u!1 &6022671657913329953
 GameObject:
   m_ObjectHideFlags: 0

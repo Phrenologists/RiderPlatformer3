@@ -55,7 +55,7 @@ namespace GMTK.PlatformerToolkit {
                 if (changeLog.Count > maxLogEntries)
                     changeLog.Dequeue();
 
-                Debug.Log($"[RotationDebugger] SCALE: {msg}", gameObject);
+                //Debug.Log($"[RotationDebugger] SCALE: {msg}", gameObject);
             }
 
             lastEndOfFrameRotation = transform.rotation;

@@ -42,6 +42,10 @@ namespace GMTK.PlatformerToolkit {
         public void CollectPowerup(MountPowerup newPowerup) {
             // Replace existing powerup if any
             if (ActivePowerup != null) {
+                if (ActivePowerup is MiniPowerup miniPowerup
+                    && miniPowerup.IsBeingCarried) {
+                    miniPowerup.Throw();
+                }
                 ActivePowerup.Deactivate();
                 Destroy(ActivePowerup);
             }
@@ -65,8 +69,15 @@ namespace GMTK.PlatformerToolkit {
         }
         
         public void OnJumpStateChanged(bool held) {
+            //Might neeed to get rid of this return statement if something doesn't work
+            if (!held) return;
+            
             if (ActivePowerup is FlightPowerup flightPowerup) {
                 flightPowerup.OnJumpHeld(held);
+            }
+            if (ActivePowerup is StickyPowerup stickyPowerup) {
+                stickyPowerup.OnJumpPressed();
+                return;
             }
         }
 

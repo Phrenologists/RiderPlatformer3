@@ -46,6 +46,8 @@ namespace GMTK.PlatformerToolkit {
         [Header("Platformer Toolkit Stuff")]
         [SerializeField] jumpTester jumpLine;
         public bool cameraFalling = false;
+        
+        public bool externalRotationControl = false;
 
         void Start() {
             moveScript = GetComponent<characterMovement>();
@@ -65,6 +67,8 @@ namespace GMTK.PlatformerToolkit {
         }
 
         private void tiltCharacter() {
+            if (externalRotationControl) return;
+            
             //See which direction the character is currently running towards, and tilt in that direction
             float directionToTilt = 0;
             if (moveScript.velocity.x != 0) {

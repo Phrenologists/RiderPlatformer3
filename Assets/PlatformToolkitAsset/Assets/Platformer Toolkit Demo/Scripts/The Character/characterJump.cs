@@ -104,7 +104,7 @@ namespace GMTK.PlatformerToolkit {
             }
         }
         
-        private void TryDropThrough() {
+        public void TryDropThrough() {
             Vector3 offset = ground.colliderOffset;
             float length = ground.groundLength;
             
@@ -312,6 +312,12 @@ namespace GMTK.PlatformerToolkit {
                 //If we don't have a jump buffer, then turn off desiredJump immediately after hitting jumping
                 desiredJump = false;
             }
+        }
+        
+        public void TriggerJump() {
+            desiredJump = true;
+            pressingJump = true;
+            Debug.Log("[characterJump] TriggerJump called");
         }
         public void CancelJump() {
             currentlyJumping = false;

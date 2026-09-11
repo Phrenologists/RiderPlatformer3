@@ -12,7 +12,7 @@ namespace GMTK.PlatformerToolkit {
         [SerializeField] private float dismountJumpForce = 8f;
 
         [Header("References")]
-        [SerializeField] private PlayerInput playerInput;
+        [SerializeField] public PlayerInput playerInput;
         [SerializeField] private characterMovement mountMovement;
         [SerializeField] private characterJump mountJump;
 
@@ -111,6 +111,21 @@ namespace GMTK.PlatformerToolkit {
 
         public void OnMount(InputAction.CallbackContext context) {
             if (!context.started) return;
+            
+            var miniPowerup = PowerupManager.Instance?.ActivePowerup as MiniPowerup;
+            if (miniPowerup != null && miniPowerup.IsMini) {
+                if (miniPowerup.IsBeingCarried) {
+                    // Already carrying — throw it
+                    miniPowerup.Throw();
+                } else if (!isMounted) {
+                    // Not carrying and not mounted — pick it up
+                    miniPowerup.PickUp();
+                } else {
+                    // Mounted on mini mount — dismount normally
+                    Dismount();
+                }
+                return;
+            }
 
             if (!isMounted) {
                 TryMount();

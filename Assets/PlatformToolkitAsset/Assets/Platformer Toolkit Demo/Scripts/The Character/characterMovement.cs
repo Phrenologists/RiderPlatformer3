@@ -42,6 +42,8 @@ namespace GMTK.PlatformerToolkit {
         
         public bool externalFlipControl = false;
 
+        public Vector3 currentSize = new Vector3(1, 1, 1);
+
         private void Awake() {
             //Find the character's Rigidbody and ground detection script
             body = GetComponent<Rigidbody2D>();
@@ -74,7 +76,7 @@ namespace GMTK.PlatformerToolkit {
                 //Also tells us that we are currently pressing a direction button
                 if (directionX != 0)
                 {
-                    transform.localScale = new Vector3(directionX > 0 ? 1 : -1, 1, 1);
+                    transform.localScale = new Vector3(directionX > 0 ? currentSize.x : -currentSize.x, currentSize.y, currentSize.z);
                     pressingKey = true;
                 }
                 else

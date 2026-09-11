@@ -48,15 +48,4 @@ MonoBehaviour:
   expiryType: 1
   maxDuration: 10
   maxAmmo: 1000
-  stickyLayers:
-    serializedVersion: 2
-    m_Bits: 520
-  stickForce: 1000
-  unitsPerAmmo: 1
-  groundAngle: 0
-  ceilingAngle: 180
-  leftWallAngle: 90
-  rightWallAngle: 270
-  showDebugLogs: 0
-  showDebugGizmos: 0
-  visualRoot: {fileID: 0}
+  raycastPauseDuration: 0.1
