@@ -21,11 +21,17 @@ namespace GMTK.PlatformerToolkit {
         private Collider2D mountCollider;
 
         private bool stuckToSurface = false;
+        
+        [Header("Mount Dimensions")]
+        [SerializeField] private float mountHalfWidth = 0.5f;
+        [SerializeField] private float mountHalfHeight = 0.14f;
 
         // Which ray caused the current rotation
         // None = not stuck, Right/Left/Down/Up = active surface
         private enum ActiveRay { None, Right, Left, Down, Up }
         private ActiveRay currentActiveRay = ActiveRay.None;
+        
+        //private ActiveRay lastSavedRay = ActiveRay.None;
 
         // Steps taken on current surface — used to decide when
         // the previous surface's ray becomes relevant again
@@ -34,11 +40,16 @@ namespace GMTK.PlatformerToolkit {
         // When false, the ray that WAS active before rotation is ignored
 
         private Vector2 lastPosition;
+        
+        private characterMovement mountMovement;
+        
+        private float rotationAngle = 0f;
 
         protected override void OnActivate() {
             mountJump = manager.MountJump;
             mountBody = manager.MountBody;
             mountCollider = manager.GetComponent<Collider2D>();
+            mountMovement = manager.MountMovement;
 
             detector = manager.GetComponent<StickyCollisionDetector>();
             if (detector == null)
@@ -47,6 +58,8 @@ namespace GMTK.PlatformerToolkit {
 
             detector.enabled = true;
             lastPosition = mountBody.position;
+            mountHalfHeight = detector.halfHeight;
+            mountHalfWidth = detector.halfWidth;
 
             Debug.Log("[StickyPowerup] Activated");
         }
@@ -82,30 +95,94 @@ namespace GMTK.PlatformerToolkit {
 
             lastPosition = mountBody.position;
 
-            // Determine best ray to act on, respecting active ray rules
+            // Handle wall movement input
+            if (stuckToSurface) {
+                HandleSurfaceMovement();
+            }
+            
+
+            // Determine best ray to act on
             ActiveRay bestRay = GetBestRay();
+                
 
             if (bestRay != ActiveRay.None && !stuckToSurface) {
-                // First contact — stick and rotate
-                manager.StartCoroutine(
-                    StickAndRotate(bestRay)
-                );
+                manager.StartCoroutine(StickAndRotate(bestRay));
             } else if (bestRay != ActiveRay.None
-                && stuckToSurface
-                && bestRay != currentActiveRay) {
-                // Already stuck but a different surface detected —
-                // rotate to new surface
+                       && stuckToSurface
+                       && bestRay != currentActiveRay) {
                 manager.StartCoroutine(StickAndRotate(bestRay));
             } else if (bestRay == ActiveRay.None && stuckToSurface) {
                 Unstick();
             }
         }
 
+        private void HandleSurfaceMovement()
+        {
+            switch (currentActiveRay)
+            {
+                case ActiveRay.Right:
+                case ActiveRay.Left:
+                    // On a wall — zero X input and use Y input for movement
+                    // ── WALL MOVEMENT INPUT ──────────────────────────────
+                    // directionX is zeroed so the mount doesn't drift
+                    // off or into the wall via the normal movement system
+                    // directionY drives vertical movement directly on the body
+                    // If up/down feel reversed on a specific wall, negate
+                    // the mountMovement.directionY read below
+                    mountMovement.directionX = 0f;
+
+                    // Use the same acceleration values as horizontal movement
+                    // by replicating characterMovement's MoveTowards logic
+                    // but applying it to the Y axis instead
+                    float targetYSpeed = mountMovement.directionY
+                                         * mountMovement.maxSpeed;
+
+                    float currentYSpeed = mountBody.velocity.y;
+
+                    float speedChange;
+                    if (Mathf.Abs(mountMovement.directionY) > 0.01f)
+                    {
+                        // Accelerating or turning
+                        if (Mathf.Sign(mountMovement.directionY)
+                            != Mathf.Sign(currentYSpeed)
+                            && Mathf.Abs(currentYSpeed) > 0.1f)
+                        {
+                            // Turning around on the wall
+                            speedChange = mountMovement.maxTurnSpeed * Time.deltaTime;
+                        }
+                        else
+                        {
+                            speedChange = mountMovement.maxAcceleration * Time.deltaTime;
+                        }
+                    }
+                    else
+                    {
+                        // No input — decelerate
+                        speedChange = mountMovement.maxDecceleration * Time.deltaTime;
+                    }
+
+                    float newYSpeed = Mathf.MoveTowards(
+                        currentYSpeed, targetYSpeed, speedChange
+                    );
+
+                    mountBody.velocity = new Vector2(0f, newYSpeed);
+                    break;
+
+                case ActiveRay.Up:
+                case ActiveRay.Down:
+                    // On ceiling or floor — normal X movement applies
+                    // characterMovement handles this already, nothing to do
+                    break;
+            }
+        }
+
+
         // ── Ray Priority ──────────────────────────────────────────────────
 
         private ActiveRay GetBestRay() {
             // Build candidate list excluding the previous active ray
             // until the step threshold is met
+            
             bool rightValid = detector.FrontContact
                 && IsRayValid(ActiveRay.Right);
             bool leftValid  = detector.BackContact
@@ -159,6 +236,43 @@ namespace GMTK.PlatformerToolkit {
                 default: return false;
             }
         }
+        private void UpdateDetectorDimensions() {
+            if (detector == null) return;
+
+            switch (rotationAngle) {
+                case 90:
+                    detector.halfWidth  = mountHalfHeight + 0.1f;
+                    detector.halfHeight = mountHalfWidth;
+                    //Debug.Log(manager.transform.rotation.z);
+                    break;
+                case 270:
+                    // Mount is rotated 90/270 degrees on a wall
+                    // What was the horizontal axis is now vertical and vice versa
+                    // So the up/down raycasts need the wider half extent
+                    // and the left/right raycasts need the taller half extent
+                    detector.halfWidth  = mountHalfHeight + 0.1f;
+                    detector.halfHeight = mountHalfWidth;
+                    //Debug.Log(manager.transform.rotation.z);
+                    break;
+
+                case 180:
+                    detector.halfWidth  = mountHalfWidth;
+                    detector.halfHeight = mountHalfHeight;
+                    //Debug.Log(manager.transform.rotation.z);
+                    break;
+                case 0:
+                    detector.halfWidth  = mountHalfWidth;
+                    detector.halfHeight = mountHalfHeight;
+                    //Debug.Log(manager.transform.rotation.z);
+                    break;
+                default:
+                    // Normal orientation or ceiling (180 degrees — same extents)
+                    detector.halfWidth  = mountHalfWidth;
+                    detector.halfHeight = mountHalfHeight;
+                    //Debug.Log(manager.transform.rotation.z);
+                    break;
+            }
+        }
 
         // ── Stick and Rotate ──────────────────────────────────────────────
 
@@ -182,17 +296,38 @@ namespace GMTK.PlatformerToolkit {
             if (juice != null) juice.externalRotationControl = true;
 
             // Track previous ray for suppression
-            previousActiveRay = currentActiveRay;
+            if(rotationAngle== 0)
+            {
+                previousActiveRay = ActiveRay.Down;
+                //Debug.Log(manager.transform.rotation.z);
+            }
+            else if(rotationAngle == 90)
+            {
+                previousActiveRay = ActiveRay.Right;
+                //Debug.Log(manager.transform.rotation.z);
+            }
+            else if (rotationAngle == 180)
+            {
+                previousActiveRay = ActiveRay.Up;
+                //Debug.Log(manager.transform.rotation.z);
+            }
+            else if (rotationAngle == 270)
+            {
+                previousActiveRay = ActiveRay.Left;
+                //Debug.Log(manager.transform.rotation.z);
+            }
             currentActiveRay = ray;
             stepsOnCurrentSurface = 0f;
             previousRayActive = false;
+            
 
             // Apply rotation instantly
-            float angle = GetAngleForRay(ray);
-            manager.transform.rotation = Quaternion.Euler(0f, 0f, angle);
+            rotationAngle = GetAngleForRay(ray);
+            manager.transform.rotation = Quaternion.Euler(0f, 0f, rotationAngle);
 
             // Wait one frame for rotation to settle
             yield return new WaitForFixedUpdate();
+            //UpdateDetectorDimensions();
 
             // Reposition to be flush against the surface
             // and clear of any other detected surfaces
@@ -205,7 +340,9 @@ namespace GMTK.PlatformerToolkit {
             if (mountCollider != null)
                 mountCollider.isTrigger = false;
 
-            Debug.Log($"[StickyPowerup] Stuck to {ray} at angle {angle}");
+            Debug.Log($"[StickyPowerup] Stuck to {ray} at angle {rotationAngle}");
+            Debug.Log(ray);
+            Debug.Log(previousActiveRay);
         }
 
         private float GetAngleForRay(ActiveRay ray) {
@@ -300,6 +437,17 @@ namespace GMTK.PlatformerToolkit {
             if (!stuckToSurface) return;
             stuckToSurface = false;
             previousActiveRay = currentActiveRay;
+
+            // Restore directionX if we were on a wall
+            // so the mount doesn't stay frozen horizontally
+            if (currentActiveRay == ActiveRay.Right
+                || currentActiveRay == ActiveRay.Left) {
+                // Don't manually set directionX back — the input system
+                // will naturally update it on the next movement input
+                // Just zero velocity so there's no leftover Y speed
+                mountBody.velocity = Vector2.zero;
+            }
+
             currentActiveRay = ActiveRay.None;
             stepsOnCurrentSurface = 0f;
             previousRayActive = false;
@@ -308,11 +456,14 @@ namespace GMTK.PlatformerToolkit {
 
             if (!mountJump.enabled)
                 mountJump.enabled = true;
-            
+
             var juice = manager.GetComponentInChildren<characterJuice>();
             if (juice != null) juice.externalRotationControl = false;
 
+            manager.transform.rotation = Quaternion.identity;
+
             Debug.Log("[StickyPowerup] Unstuck");
+            //UpdateDetectorDimensions();
         }
 
         // ── Jump ──────────────────────────────────────────────────────────

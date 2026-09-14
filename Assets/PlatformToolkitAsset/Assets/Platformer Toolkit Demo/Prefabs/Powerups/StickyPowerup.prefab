@@ -49,3 +49,6 @@ MonoBehaviour:
   maxDuration: 10
   maxAmmo: 1000
   raycastPauseDuration: 0.1
+  stepsBeforeRaycastActive: 2
+  mountHalfWidth: 0.5
+  mountHalfHeight: 0.14
