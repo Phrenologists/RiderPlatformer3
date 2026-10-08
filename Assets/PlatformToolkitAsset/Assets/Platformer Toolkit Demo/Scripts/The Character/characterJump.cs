@@ -267,7 +267,10 @@ namespace GMTK.PlatformerToolkit {
 
             //Set the character's Rigidbody's velocity
             //But clamp the Y variable within the bounds of the speed limit, for the terminal velocity assist option
-            body.velocity = new Vector3(velocity.x, Mathf.Clamp(velocity.y, -speedLimit, 100));
+            if(body.bodyType == RigidbodyType2D.Dynamic)
+            {
+                body.velocity = new Vector3(velocity.x, Mathf.Clamp(velocity.y, -speedLimit, 100));
+            }
         }
 
         private void DoAJump() {
@@ -317,7 +320,7 @@ namespace GMTK.PlatformerToolkit {
         public void TriggerJump() {
             desiredJump = true;
             pressingJump = true;
-            Debug.Log("[characterJump] TriggerJump called");
+            //Debug.Log("[characterJump] TriggerJump called");
         }
         public void CancelJump() {
             currentlyJumping = false;

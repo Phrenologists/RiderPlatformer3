@@ -140,7 +140,10 @@ namespace GMTK.PlatformerToolkit {
             velocity.x = Mathf.MoveTowards(velocity.x, desiredVelocity.x, maxSpeedChange);
 
             //Update the Rigidbody with this new velocity
-            body.velocity = velocity;
+            if(body.bodyType == RigidbodyType2D.Dynamic)
+            {
+                body.velocity = velocity;
+            }
 
         }
 

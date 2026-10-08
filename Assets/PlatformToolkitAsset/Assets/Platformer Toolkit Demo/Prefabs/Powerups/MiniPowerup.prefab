@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &6008124405468814457
+--- !u!1 &8797215933659600870
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,22 +8,22 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5627742342691492620}
-  - component: {fileID: 2801322072777792643}
+  - component: {fileID: 7452641338437146771}
+  - component: {fileID: 2987250051660450713}
   m_Layer: 0
-  m_Name: StickyPowerup
+  m_Name: MiniPowerup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5627742342691492620
+--- !u!4 &7452641338437146771
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6008124405468814457}
+  m_GameObject: {fileID: 8797215933659600870}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 183.19202, y: 170.53317, z: -11.89119}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -31,29 +31,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2801322072777792643
+--- !u!114 &2987250051660450713
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6008124405468814457}
+  m_GameObject: {fileID: 8797215933659600870}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 079d0707e6594a244916cf0e4c3913d0, type: 3}
+  m_Script: {fileID: 11500000, guid: 4f75c52c25f53ce43bd77b37d1c4f380, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   powerupName: 
   icon: {fileID: 0}
-  expiryType: 1
+  expiryType: 0
   maxDuration: 10
-  maxAmmo: 1000
-  raycastPauseDuration: 0.6
-  unitsPerAmmo: 1
-  stepsBeforeRaycastActive: 2
-  mountHalfWidth: 0.5
-  mountHalfHeight: 0.14
-  floorGap: 0.2
-  leftWallGap: 0.2
-  rightWallGap: 0.2
-  ceilingGap: 0.2
+  maxAmmo: 5
+  miniScale: 0.25
+  carryOffset: {x: 0, y: 1, z: 0}
+  throwForce: 30

@@ -5326,7 +5326,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6022671657861841303}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8e190085b8e2e45129a2054dd1e70e93, type: 3}
   m_Name: 
@@ -5454,7 +5454,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6022671657861841303}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 92a8ff09602fd734ebbad02fa0822537, type: 3}
   m_Name: 
@@ -5476,9 +5476,9 @@ MonoBehaviour:
   stickyLayers:
     serializedVersion: 2
     m_Bits: 521
-  detectionDistance: 0.3
-  halfWidth: 0.5
-  halfHeight: 0.5
+  detectionDistance: 0.45
+  halfWidth: 0.6
+  halfHeight: 0.4
 --- !u!1 &6022671657913329953
 GameObject:
   m_ObjectHideFlags: 0

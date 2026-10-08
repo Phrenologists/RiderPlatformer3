@@ -275,7 +275,10 @@ namespace GMTK.PlatformerToolkit {
             isCharging = true;
 
             // Drive the mount directly, bypassing characterMovement
-            mountBody.velocity = new Vector2(chargeDirection * mountedDashSpeed, 0);
+            if(mountBody.bodyType == RigidbodyType2D.Dynamic)
+            {
+                mountBody.velocity = new Vector2(chargeDirection * mountedDashSpeed, 0);
+            }
             mountHurt.isCharging = true;
             
             //Debug.Log(mountHurt.isCharging);

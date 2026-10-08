@@ -75,6 +75,9 @@ namespace GMTK.PlatformerToolkit {
             OnExpired();
             manager?.OnPowerupExpired();
         }
+        public void ReleaseButton() {
+            OnButtonReleased();
+        }
 
         // ── Abstract / Virtual ────────────────────────────────────────────
 
@@ -89,6 +92,10 @@ namespace GMTK.PlatformerToolkit {
 
         // Called when the powerup button is pressed
         protected virtual void OnButtonPressed() { }
+        
+        protected virtual void OnButtonReleased() { }
+        
+        
 
         // Returns display string for UI counter
         // Override for custom formatting

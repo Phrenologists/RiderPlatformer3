@@ -33,8 +33,14 @@ namespace GMTK.PlatformerToolkit {
 
         // Wire to PowerupButton input action in InputManager
         public void OnPowerupButton(InputAction.CallbackContext context) {
-            if (!context.started) return;
-            ActivePowerup?.UseButton();
+            if (context.started) {
+                ActivePowerup?.UseButton();
+                Debug.Log("[PowerupManager] Button started");
+            }
+            if (context.canceled) {
+                ActivePowerup?.ReleaseButton();
+                Debug.Log("[PowerupManager] Button canceled");
+            }
         }
 
         // ── Powerup Lifecycle ─────────────────────────────────────────────
