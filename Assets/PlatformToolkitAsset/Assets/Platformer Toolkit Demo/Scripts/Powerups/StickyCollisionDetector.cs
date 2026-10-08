@@ -37,6 +37,12 @@ namespace GMTK.PlatformerToolkit {
         private bool downPaused  = false;
         private bool upPaused    = false;
         
+        [Header("Detection Distances")]
+        [SerializeField] public float rightDistance = 0.8f;
+        [SerializeField] public float leftDistance  = 0.8f;
+        [SerializeField] public float downDistance  = 0.6f;
+        [SerializeField] public float upDistance    = 0.6f;
+        
         public void PauseRayFor(string ray, float duration) {
             StartCoroutine(PauseRayRoutine(ray, duration));
         }
@@ -79,13 +85,13 @@ namespace GMTK.PlatformerToolkit {
             Vector2 center = transform.position;
 
             RightHit = rightPaused ? default : Physics2D.Raycast(
-                center, Vector2.right, detectionDistance, stickyLayers);
+                center, Vector2.right, rightDistance, stickyLayers);
             LeftHit  = leftPaused  ? default : Physics2D.Raycast(
-                center, Vector2.left,  detectionDistance, stickyLayers);
+                center, Vector2.left,  leftDistance,  stickyLayers);
             DownHit  = downPaused  ? default : Physics2D.Raycast(
-                center, Vector2.down,  detectionDistance, stickyLayers);
+                center, Vector2.down,  downDistance,  stickyLayers);
             UpHit    = upPaused    ? default : Physics2D.Raycast(
-                center, Vector2.up,    detectionDistance, stickyLayers);
+                center, Vector2.up,    upDistance,    stickyLayers);
             
             Vector2 diagonalOrigin = center
                                      + Vector2.up    * halfHeight
@@ -113,64 +119,34 @@ namespace GMTK.PlatformerToolkit {
         private void OnDrawGizmos() {
             Vector2 center = transform.position;
 
-            DrawDetailedRay(
-                center + Vector2.right * halfWidth,
-                Vector2.right, FrontContact, Color.red, "R");
-            DrawDetailedRay(
-                center + Vector2.left * halfWidth,
-                Vector2.left, BackContact, Color.blue, "L");
-            DrawDetailedRay(
-                center + Vector2.down * halfHeight,
-                Vector2.down, DownContact, Color.green, "D");
-            DrawDetailedRay(
-                center + Vector2.up * halfHeight,
-                Vector2.up, UpContact, Color.yellow, "U");
+            DrawDetailedRay(center, Vector2.right, rightDistance,
+                FrontContact, Color.red,    "R");
+            DrawDetailedRay(center, Vector2.left,  leftDistance,
+                BackContact,  Color.blue,   "L");
+            DrawDetailedRay(center, Vector2.down,  downDistance,
+                DownContact,  Color.green,  "D");
+            DrawDetailedRay(center, Vector2.up,    upDistance,
+                UpContact,    Color.yellow, "U");
         }
-        
+
         private void DrawDetailedRay(Vector2 origin, Vector2 dir,
-            bool hit, Color color, string label) {
+            float distance, bool hit, Color color, string label) {
 
-            Color activeColor = hit ? color : new Color(
-                color.r, color.g, color.b, 0.2f);
+            Gizmos.color = hit ? color : new Color(color.r, color.g, color.b, 0.2f);
+            Gizmos.DrawLine(origin, origin + dir * distance);
+            Gizmos.DrawSphere(origin + dir * distance, hit ? 0.08f : 0.04f);
 
-            // Draw the main line
-            Gizmos.color = activeColor;
-            Gizmos.DrawLine(origin, origin + dir * detectionDistance);
-
-            // Draw spheres along the ray so it's visible even
-            // when the Scene view is zoomed out
-            int dotCount = 3;
-            for (int i = 1; i <= dotCount; i++) {
-                float t = i / (float)(dotCount + 1);
-                Vector2 point = origin + dir * detectionDistance * t;
-                float size = hit ? 0.06f : 0.03f;
-                Gizmos.DrawSphere(point, size);
-            }
-
-            // Draw a larger sphere at the origin
-            Gizmos.DrawSphere(origin, hit ? 0.08f : 0.04f);
-
-            // Draw a sphere at the tip
-            Gizmos.DrawSphere(
-                origin + dir * detectionDistance,
-                hit ? 0.06f : 0.03f
-            );
-
-            // If hit, draw a cross at the hit point
             if (hit) {
                 RaycastHit2D hitResult = GetHitForLabel(label);
                 if (hitResult.collider != null) {
                     Gizmos.color = Color.white;
-                    Vector2 hitPoint = hitResult.point;
                     float crossSize = 0.1f;
                     Gizmos.DrawLine(
-                        hitPoint + Vector2.up * crossSize,
-                        hitPoint + Vector2.down * crossSize
-                    );
+                        hitResult.point + Vector2.up    * crossSize,
+                        hitResult.point + Vector2.down  * crossSize);
                     Gizmos.DrawLine(
-                        hitPoint + Vector2.left * crossSize,
-                        hitPoint + Vector2.right * crossSize
-                    );
+                        hitResult.point + Vector2.left  * crossSize,
+                        hitResult.point + Vector2.right * crossSize);
                 }
             }
         }
@@ -184,17 +160,21 @@ namespace GMTK.PlatformerToolkit {
             screenPos.y = Screen.height - screenPos.y;
 
             GUI.color = AnyContact ? Color.green : Color.red;
-            GUI.Label(new Rect(screenPos.x + 20f, screenPos.y - 80f, 220f, 140f),
+            GUI.Label(new Rect(screenPos.x + 20f, screenPos.y - 100f, 220f, 140f),
                 $"=== STICKY RAYS ===\n" +
                 $"Right: {(FrontContact ? "HIT" : "---")} " +
-                $"{(rightPaused ? "[PAUSED]" : "")}\n" +
+                $"{(rightPaused ? "[P]" : "")} " +
+                $"{(RightHit.collider != null ? RightHit.distance.ToString("F2") : "")}\n" +
                 $"Left:  {(BackContact  ? "HIT" : "---")} " +
-                $"{(leftPaused  ? "[PAUSED]" : "")}\n" +
+                $"{(leftPaused  ? "[P]" : "")} " +
+                $"{(LeftHit.collider  != null ? LeftHit.distance.ToString("F2")  : "")}\n" +
                 $"Down:  {(DownContact  ? "HIT" : "---")} " +
-                $"{(downPaused  ? "[PAUSED]" : "")}\n" +
+                $"{(downPaused  ? "[P]" : "")} " +
+                $"{(DownHit.collider  != null ? DownHit.distance.ToString("F2")  : "")}\n" +
                 $"Up:    {(UpContact    ? "HIT" : "---")} " +
-                $"{(upPaused    ? "[PAUSED]" : "")}\n" +
-                $"Global Paused: {!raycasting}"
+                $"{(upPaused    ? "[P]" : "")} " +
+                $"{(UpHit.collider    != null ? UpHit.distance.ToString("F2")    : "")}\n" +
+                $"Global: {(!raycasting ? "[PAUSED]" : "active")}"
             );
         }
         private RaycastHit2D GetHitForLabel(string label) {
