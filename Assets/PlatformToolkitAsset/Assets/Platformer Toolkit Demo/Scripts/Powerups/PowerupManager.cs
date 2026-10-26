@@ -70,7 +70,7 @@ namespace GMTK.PlatformerToolkit {
             ActivePowerup.Deactivate();
             Destroy(ActivePowerup);
             ActivePowerup = null;
-            mountJump.useExternalJumpDirection = false;
+
             PowerupUI.Instance?.HidePowerup();
         }
         

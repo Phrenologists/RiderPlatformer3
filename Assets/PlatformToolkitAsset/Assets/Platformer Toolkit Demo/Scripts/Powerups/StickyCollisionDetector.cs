@@ -47,8 +47,7 @@ namespace GMTK.PlatformerToolkit {
             StartCoroutine(PauseRayRoutine(ray, duration));
         }
 
-        private IEnumerator PauseRayRoutine(string ray, float duration) 
-        {
+        private IEnumerator PauseRayRoutine(string ray, float duration) {
             SetRayPaused(ray, true);
             yield return new WaitForSeconds(duration);
             SetRayPaused(ray, false);

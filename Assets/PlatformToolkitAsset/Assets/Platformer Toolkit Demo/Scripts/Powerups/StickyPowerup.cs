@@ -17,6 +17,9 @@ namespace GMTK.PlatformerToolkit
 
         [Header("Step Threshold")] [SerializeField]
         private float stepsBeforeRaycastActive = 2f;
+        // How many distance units the mount must travel on
+        // the new surface before the previous surface's ray
+        // becomes relevant again
 
         private StickyCollisionDetector detector;
         private characterJump mountJump;
@@ -42,16 +45,6 @@ namespace GMTK.PlatformerToolkit
 
         // Re-entry guard for StickAndRotate
         private bool isTransitioning = false;
-
-        [Header("Surface Offsets")]
-        [SerializeField] private float floorOffset = 0.5f;
-        // Distance from mount center to floor surface
-        [SerializeField] private float wallOffset = 0.5f;
-        // Distance from mount center to wall surface  
-        [SerializeField] private float ceilingOffset = 0.5f;
-        // Distance from mount center to ceiling surface
-        // These should match your mount's half extents
-        // e.g. if mount is 1 unit tall, floorOffset = 0.5
 
         // Which ray caused the current rotation
         // None = not stuck, Right/Left/Down/Up = active surface
@@ -86,8 +79,6 @@ namespace GMTK.PlatformerToolkit
         [SerializeField] private float leftWallGap = 1f;
         [SerializeField] private float rightWallGap = 1f;
         [SerializeField] private float ceilingGap = 1f;
-
-        private Vector2 jumpDir = Vector2.up;
         
         
         
@@ -136,17 +127,20 @@ namespace GMTK.PlatformerToolkit
 
             isInAir = !mountGround.GetOnGround() && !stuckToSurface;
 
-            if (mountGround.GetOnGround() && currentRotation == 0)
-            {
-                jumpDir = Vector2.up;
-            }
-
             // Track steps on current surface for previous ray cooldown
             if (stuckToSurface)
             {
                 TrackDistance(deltaTime);
                 float moved = Vector2.Distance(mountBody.position, lastPosition);
                 stepsOnCurrentSurface += moved;
+
+                /*
+                if (!previousRayActive &&
+                    stepsOnCurrentSurface >= stepsBeforeRaycastActive) {
+                    previousRayActive = true;
+                    Debug.Log("[StickyPowerup] Previous ray now active again");
+                }
+                */
             }
 
             float dirX = mountMovement.directionX;
@@ -178,21 +172,16 @@ namespace GMTK.PlatformerToolkit
             // Check all four stick methods in order
             if (ShouldStickToFloor(rot, dirX, dirY, rightHit, leftHit, downHit, upHit))
             {
-                mountJump.useExternalJumpDirection = false;
-                jumpDir = Vector2.up;
+                Debug.Break();
                 Debug.Log(downHit ? "Down" : "Jump");
-                mountMovement.enabled = true;
                 manager.StartCoroutine(StickAndRotate(0f));
                 return;
-
             }
 
             if (ShouldStickToLeftWall(rot, dirX, dirY,
                     rightHit, leftHit, downHit, upHit))
             {
-                mountJump.useExternalJumpDirection = true;
-                jumpDir = Vector2.right;
-                mountMovement.enabled = false;
+                Debug.Break();
                 manager.StartCoroutine(StickAndRotate(270f));
                 return;
             }
@@ -200,9 +189,7 @@ namespace GMTK.PlatformerToolkit
             if (ShouldStickToRightWall(rot, dirX, dirY,
                     rightHit, leftHit, downHit, upHit))
             {
-                mountJump.useExternalJumpDirection = true;
-                jumpDir = Vector2.left;
-                mountMovement.enabled = false;
+                Debug.Break();
                 manager.StartCoroutine(StickAndRotate(90f));
                 return;
             }
@@ -210,17 +197,31 @@ namespace GMTK.PlatformerToolkit
             if (ShouldStickToCeiling(rot, dirX, dirY,
                     rightHit, leftHit, downHit, upHit))
             {
-                mountJump.useExternalJumpDirection = true;
-                jumpDir = Vector2.down;
-                mountMovement.enabled = true;
+                Debug.Break();
                 manager.StartCoroutine(StickAndRotate(180f));
                 return;
             }
+
+            /*
+            // Determine best ray to act on
+            ActiveRay bestRay = GetBestRay();
+
+
+            if (bestRay != ActiveRay.None && !stuckToSurface) {
+                manager.StartCoroutine(StickAndRotate(bestRay));
+            } else if (bestRay != ActiveRay.None
+                       && stuckToSurface
+                       && bestRay != currentActiveRay) {
+                manager.StartCoroutine(StickAndRotate(bestRay));
+            } else if (bestRay == ActiveRay.None && stuckToSurface) {
+                Unstick();
+            }
+            */
         }
 
         private bool ShouldStickToFloor(int rot, float dirX, float dirY, bool rightHit, bool leftHit, bool downHit, bool upHit)
         {
-            //Debug.Log(downHit);
+            Debug.Log(downHit);
 
             // Already on floor
             if (rot == 0 && stuckToSurface) return false;
@@ -332,6 +333,48 @@ namespace GMTK.PlatformerToolkit
 
             return false;
         }
+        
+        private void CheckForNewRotation(int rot, float dirX, float dirY)
+        {
+            if (rot == 0 && dirX > 0);
+            {
+                manager.StartCoroutine(StickAndRotate(270f));
+            }
+
+            if (rot == 180 && dirX > 0);
+            {
+                manager.StartCoroutine(StickAndRotate(270f));
+            }
+            if (rot == 0 && dirX < 0);
+            {
+                manager.StartCoroutine(StickAndRotate(90f));
+            }
+            if (rot == 180 && dirX < 0)
+            {
+                manager.StartCoroutine(StickAndRotate(90f));
+            }
+
+            if (rot == 90 && dirY > 0)
+            {
+                manager.StartCoroutine(StickAndRotate(180f));
+            }
+
+            if (rot == 270 && dirY > 0)
+            {
+                manager.StartCoroutine(StickAndRotate(180f));
+            }
+            if (rot == 90 && dirY < 0)
+            {
+                manager.StartCoroutine(StickAndRotate(0f));
+                this.transform.position = new Vector3(transform.position.x, transform.position.y + 200f, transform.position.z);
+            }
+
+            if (rot == 270 && dirY < 0)
+            {
+                manager.StartCoroutine(StickAndRotate(0f));
+                this.transform.position = new Vector3(transform.position.x, transform.position.y + 200f, transform.position.z);
+            }
+        }
 
         
         private void HandleSurfaceMovement()
@@ -394,6 +437,128 @@ namespace GMTK.PlatformerToolkit
             }
         }
 
+
+        // ── Ray Priority ──────────────────────────────────────────────────
+/*
+        private ActiveRay GetBestRay()
+        {
+            // Build candidate list excluding the previous active ray
+            // until the step threshold is met
+
+            bool rightValid = detector.FrontContact
+                              && IsRayValid(ActiveRay.Right);
+            bool leftValid = detector.BackContact
+                             && IsRayValid(ActiveRay.Left);
+            bool downValid = detector.DownContact
+                             && IsRayValid(ActiveRay.Down);
+            bool upValid = detector.UpContact
+                           && IsRayValid(ActiveRay.Up);
+
+            // Non-active rays take priority over the current active ray
+            // Among non-active rays: Down > Right > Left > Up
+            // (most common surfaces first)
+            if (downValid && currentActiveRay != ActiveRay.Down)
+                return ActiveRay.Down;
+            if (rightValid && currentActiveRay != ActiveRay.Right)
+                return ActiveRay.Right;
+            if (leftValid && currentActiveRay != ActiveRay.Left)
+                return ActiveRay.Left;
+            if (upValid && currentActiveRay != ActiveRay.Up)
+                return ActiveRay.Up;
+
+
+            // Fall back to current active ray if still in contact
+            if (currentActiveRay != ActiveRay.None)
+            {
+                bool currentContact = GetContactForRay(currentActiveRay);
+                if (currentContact) return currentActiveRay;
+            }
+
+            // When on ceiling, diagonal hit means we're approaching
+            // a wall — treat it as a right or left contact
+            // so we transition smoothly instead of losing contact
+            if (currentActiveRay == ActiveRay.Up && detector.DiagonalContact)
+            {
+                // Determine which side the diagonal hit is on
+                // by checking which diagonal fired
+                rightValid = true;
+                // The diagonal detector already picks left vs right
+                // internally — if left diagonal fired, treat as left
+                // This will trigger StickAndRotate to the wall
+            }
+
+            return ActiveRay.None;
+        }
+
+        private bool IsRayValid(ActiveRay ray)
+        {
+            // The previous active ray is invalid until step threshold met
+            if (!previousRayActive && ray == GetPreviousActiveRay())
+                return false;
+            return true;
+        }
+        */
+
+        // We store the previous ray to know what to suppress
+        //private ActiveRay previousActiveRay = ActiveRay.None;
+
+        //private ActiveRay GetPreviousActiveRay()
+        //{
+            //return previousActiveRay;
+        //}
+
+        private bool GetContactForRay(ActiveRay ray)
+        {
+            switch (ray)
+            {
+                case ActiveRay.Right: return detector.FrontContact;
+                case ActiveRay.Left: return detector.BackContact;
+                case ActiveRay.Down: return detector.DownContact;
+                case ActiveRay.Up: return detector.UpContact;
+                default: return false;
+            }
+        }
+
+        private void UpdateDetectorDimensions()
+        {
+            if (detector == null) return;
+
+            switch (rotationAngle)
+            {
+                case 90:
+                    detector.halfWidth = mountHalfHeight + 0.1f;
+                    detector.halfHeight = mountHalfWidth;
+                    //Debug.Log(manager.transform.rotation.z);
+                    break;
+                case 270:
+                    // Mount is rotated 90/270 degrees on a wall
+                    // What was the horizontal axis is now vertical and vice versa
+                    // So the up/down raycasts need the wider half extent
+                    // and the left/right raycasts need the taller half extent
+                    detector.halfWidth = mountHalfHeight + 0.1f;
+                    detector.halfHeight = mountHalfWidth;
+                    //Debug.Log(manager.transform.rotation.z);
+                    break;
+
+                case 180:
+                    detector.halfWidth = mountHalfWidth;
+                    detector.halfHeight = mountHalfHeight;
+                    //Debug.Log(manager.transform.rotation.z);
+                    break;
+                case 0:
+                    detector.halfWidth = mountHalfWidth;
+                    detector.halfHeight = mountHalfHeight;
+                    //Debug.Log(manager.transform.rotation.z);
+                    break;
+                default:
+                    // Normal orientation or ceiling (180 degrees — same extents)
+                    detector.halfWidth = mountHalfWidth;
+                    detector.halfHeight = mountHalfHeight;
+                    //Debug.Log(manager.transform.rotation.z);
+                    break;
+            }
+        }
+
         // ── Stick and Rotate ──────────────────────────────────────────────
 
         private IEnumerator StickAndRotate(float targetAngle)
@@ -414,7 +579,6 @@ namespace GMTK.PlatformerToolkit
             if (mountJump.enabled)
                 mountJump.enabled = false;
 
-
             if (mountJuice != null)
                 mountJuice.externalRotationControl = true;
             // Apply rotation
@@ -432,7 +596,73 @@ namespace GMTK.PlatformerToolkit
                 mountCollider.isTrigger = false;
 
             isTransitioning = false;
+
+            //Debug.Log($"[StickyPowerup] Stuck at {targetAngle} degrees");
+
+            // Track previous ray for suppression
+            /*
+            if(rotationAngle== 0)
+            {
+                previousActiveRay = ActiveRay.Down;
+                //Debug.Log(manager.transform.rotation.z);
+            }
+            else if(rotationAngle == 90)
+            {
+                previousActiveRay = ActiveRay.Right;
+                //Debug.Log(manager.transform.rotation.z);
+            }
+            else if (rotationAngle == 180)
+            {
+                previousActiveRay = ActiveRay.Up;
+                //Debug.Log(manager.transform.rotation.z);
+            }
+            else if (rotationAngle == 270)
+            {
+                previousActiveRay = ActiveRay.Left;
+                //Debug.Log(manager.transform.rotation.z);
+            }
+            currentActiveRay = ray;
+            stepsOnCurrentSurface = 0f;
+            previousRayActive = false;
+
+
+            // Apply rotation instantly
+            rotationAngle = GetAngleForRay(ray);
+            manager.transform.rotation = Quaternion.Euler(0f, 0f, rotationAngle);
+
+            // Wait one frame for rotation to settle
+            yield return new WaitForFixedUpdate();
+            //UpdateDetectorDimensions();
+
+            // Reposition to be flush against the surface
+            // and clear of any other detected surfaces
+            RepositionOnSurface(ray);
+
+            // Wait one more frame after reposition
+            yield return new WaitForFixedUpdate();
+
+            // Re-enable collider
+            if (mountCollider != null)
+                mountCollider.isTrigger = false;
+
+            Debug.Log($"[StickyPowerup] Stuck to {ray} at angle {rotationAngle}");
+            Debug.Log(ray);
+            Debug.Log(previousActiveRay);
+            */
         }
+        /*
+        private float GetAngleForRay(ActiveRay ray)
+        {
+            switch (ray)
+            {
+                case ActiveRay.Right: return 90f;
+                case ActiveRay.Left: return 270f;
+                case ActiveRay.Up: return 180f;
+                case ActiveRay.Down:
+                default: return 0f;
+            }
+        }
+        */
 
         private void RepositionOnSurface(float angle)
         {
@@ -445,7 +675,8 @@ namespace GMTK.PlatformerToolkit
                 case 0: // Floor
                     if (detector.DownHit.collider != null)
                     {
-                        pos.y = detector.DownHit.point.y + floorOffset;
+                        float gap = detector.detectionDistance - detector.DownHit.distance;
+                        pos.y -= gap;
                     }
 
                     break;
@@ -453,11 +684,8 @@ namespace GMTK.PlatformerToolkit
                 case 90: // Right wall
                     if (detector.RightHit.collider != null)
                     {
-                        pos.x = detector.RightHit.point.x - wallOffset;
-                        // Also align Y to where the ray hit
-                        // so the mount isn't floating above or below
-                        // the wall contact point after rotation
-                        pos.y = detector.RightHit.point.y;
+                        float gap = detector.detectionDistance - detector.RightHit.distance;
+                        pos.x += gap;
                     }
 
                     break;
@@ -465,9 +693,8 @@ namespace GMTK.PlatformerToolkit
                 case 270: // Left wall
                     if (detector.LeftHit.collider != null)
                     {
-                        pos.x = detector.LeftHit.point.x + wallOffset;
-                        pos.y = detector.LeftHit.point.y;
-
+                        float gap = detector.detectionDistance - detector.LeftHit.distance;
+                        pos.x -= gap;
                     }
 
                     break;
@@ -475,7 +702,8 @@ namespace GMTK.PlatformerToolkit
                 case 180: // Ceiling
                     if (detector.UpHit.collider != null)
                     {
-                        pos.y = detector.UpHit.point.y - ceilingOffset;
+                        float gap = detector.detectionDistance - detector.UpHit.distance;
+                        pos.y += gap;
                     }
 
                     break;
@@ -484,16 +712,54 @@ namespace GMTK.PlatformerToolkit
             manager.transform.position = pos;
         }
 
+        // Also check other active rays and adjust to avoid
+        // clipping into those surfaces too
+        // Only adjust axes not already handled by primary surface
+        /*
+        if (ray != ActiveRay.Right && ray != ActiveRay.Left) {
+            // Primary was vertical — also check horizontal
+            if (detector.RightHit.collider != null) {
+                float gap = detector.detectionDistance
+                    - detector.RightHit.distance;
+                pos.x = Mathf.Min(pos.x,
+                    pos.x - gap); // push away from right wall
+            }
+            if (detector.LeftHit.collider != null) {
+                float gap = detector.detectionDistance
+                    - detector.LeftHit.distance;
+                pos.x = Mathf.Max(pos.x,
+                    pos.x + gap); // push away from left wall
+            }
+        }
+
+        if (ray != ActiveRay.Up && ray != ActiveRay.Down) {
+            // Primary was horizontal — also check vertical
+            if (detector.DownHit.collider != null) {
+                float gap = detector.detectionDistance
+                    - detector.DownHit.distance;
+                pos.y = Mathf.Min(pos.y,
+                    pos.y - gap);
+            }
+            if (detector.UpHit.collider != null) {
+                float gap = detector.detectionDistance
+                    - detector.UpHit.distance;
+                pos.y = Mathf.Max(pos.y,
+                    pos.y + gap);
+            }
+        }
+
+        manager.transform.position = pos;
+        */
+
+        // ── Unstick ───────────────────────────────────────────────────────
+
         private void Unstick()
         {
-
-            mountMovement.enabled = true;
- 
-
             if (stuckToSurface)
             {
                 //CheckForNewRotation(Mathf.RoundToInt(currentRotation), mountMovement.directionX, mountMovement.directionY);
             }
+            
             if (!stuckToSurface && currentRotation == 0f) return;
             stuckToSurface = false;
             currentRotation = 0f;
@@ -537,7 +803,7 @@ namespace GMTK.PlatformerToolkit
 
             //Debug.Log("[StickyPowerup] Jump pressed");
 
-            //jumpDir = GetJumpDirection();
+            Vector2 jumpDir = GetJumpDirection();
 
             // Unstick first — restores gravity and jump script
             Unstick();
@@ -561,7 +827,6 @@ namespace GMTK.PlatformerToolkit
         private Vector2 GetJumpDirection()
         {
             int rot = Mathf.RoundToInt(currentRotation);
-            Debug.Log("Getting current rotation");
             switch (rot)
             {
                 case 90: return Vector2.left;
@@ -574,7 +839,6 @@ namespace GMTK.PlatformerToolkit
         private IEnumerator FireJump()
         {
             yield return null;
-            mountJump.forceJumpNextFrame = true;
             mountJump.TriggerJump();
             
             string surfaceRay = GetSurfaceRayName();
@@ -586,16 +850,11 @@ namespace GMTK.PlatformerToolkit
                     detector.PauseRayFor(ray, otherRaycastPauseDuration);
              }
             yield return null;
-
-            Debug.Log($"[FireJump] Clearing external direction. " +
-            $"useExternal was: {mountJump.useExternalJumpDirection}");
-
             mountJump.useExternalJumpDirection = false;
             mountJump.externalJumpDirection = Vector2.up;
             
             yield return new WaitForSeconds(raycastPauseDuration);
             justJumped = false;
-            Debug.Log("[FireJump] justJumped cleared");
         }
         
         private string GetSurfaceRayName() {

@@ -5479,10 +5479,6 @@ MonoBehaviour:
   detectionDistance: 0.45
   halfWidth: 0.6
   halfHeight: 0.4
-  rightDistance: 0.9
-  leftDistance: 0.9
-  downDistance: 0.9
-  upDistance: 0.9
 --- !u!1 &6022671657913329953
 GameObject:
   m_ObjectHideFlags: 0
