@@ -150,6 +150,7 @@ namespace GMTK.PlatformerToolkit {
                 //ForceMode2D.Force
             //);
 
+
             // Cancel velocity component pointing away from surface
             float awaySpeed = Vector2.Dot(body.velocity, surfaceNormal);
             if (awaySpeed > 0) {
