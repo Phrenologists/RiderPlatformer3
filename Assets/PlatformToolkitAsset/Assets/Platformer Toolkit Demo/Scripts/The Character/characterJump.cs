@@ -68,6 +68,8 @@ namespace GMTK.PlatformerToolkit {
         public Vector2 externalJumpDirection = Vector2.up;
         public bool useExternalJumpDirection = false;
 
+        public bool forceJumpNextFrame;
+
         void Awake() {
             //Find the character's Rigidbody and ground detection and juice scripts
 
@@ -276,8 +278,9 @@ namespace GMTK.PlatformerToolkit {
         private void DoAJump() {
 
             //Create the jump, provided we are on the ground, in coyote time, or have a double jump available
-            if (onGround || (coyoteTimeCounter > 0.03f && coyoteTimeCounter < coyoteTime) || canJumpAgain) {
+            if (onGround || (coyoteTimeCounter > 0.03f && coyoteTimeCounter < coyoteTime) || canJumpAgain || forceJumpNextFrame) {
                 desiredJump = false;
+                forceJumpNextFrame = false;
                 jumpBufferCounter = 0;
                 coyoteTimeCounter = 0;
 
@@ -300,6 +303,7 @@ namespace GMTK.PlatformerToolkit {
                 if (useExternalJumpDirection) {
                     // Jump away from the surface
                     velocity += externalJumpDirection.normalized * jumpSpeed;
+                    //Debug.Log("External velocity jump");
                 } else {
                     velocity.y += jumpSpeed;
                 }

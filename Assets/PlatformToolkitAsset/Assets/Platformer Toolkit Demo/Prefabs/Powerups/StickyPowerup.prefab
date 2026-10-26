@@ -48,11 +48,15 @@ MonoBehaviour:
   expiryType: 1
   maxDuration: 10
   maxAmmo: 1000
-  raycastPauseDuration: 0.6
+  raycastPauseDuration: 0.1
+  otherRaycastPauseDuration: 0.2
   unitsPerAmmo: 1
   stepsBeforeRaycastActive: 2
   mountHalfWidth: 0.5
   mountHalfHeight: 0.14
+  floorOffset: 0.5
+  wallOffset: 0.5
+  ceilingOffset: 0.5
   floorGap: 0.2
   leftWallGap: 0.2
   rightWallGap: 0.2
